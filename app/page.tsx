@@ -14,18 +14,18 @@ import { PropsWithChildren } from "react";
 
 
 const Section = ({ children }: PropsWithChildren) => {
-  return <div className="md:px-8 md:pb-8 px-2 pb-2">{children}</div>;
+  return <div className="px-[40px]">{children}</div>;
 };
 
 export default async function Home() {
   const slides = await fetchPublicData("hero")
   return (
-    <div className="min-h-screen bg-white w-full flex flex-col relative">
+    <div className="min-h-screen bg-white w-full flex flex-col relative gap-[40px]">
       <Header />
-
-      <div className="md:p-8 px-2 py-2 w-full">
+      <Section>
         <HeroCarousel slides={slides} />
-      </div>
+      </Section>
+
       <Section>
         <Featured />
       </Section>

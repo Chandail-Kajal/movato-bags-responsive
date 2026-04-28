@@ -12,8 +12,11 @@ const Button = ({
   return (
     <button
       onClick={onClick}
-      className={`md:text-sm text-xs flex-1 font-sans border-2 border-[#3D4637] text-[#304B39] flex items-center justify-center text-center rounded-xs md:px-4 md:py-2.5 p-2 ${isActive && "font-medium border-3"}`}
-    >
+     className={`lg:text-[20px] text-sm flex-1 font-sans border-2 border-[#3D4637] text-[#304B39] flex items-center justify-center text-center text-nowrap rounded-xs 
+lg:px-4 lg:py-3 
+md:max-lg:px-4 md:max-lg:py-2.5 
+sm:max-md:px-3 sm:max-md:py-2 
+${isActive && "font-medium border-3"}`}>
       {children}
     </button>
   );
@@ -41,26 +44,26 @@ export function ShopYourLuggage() {
 
 
   return (
-    <div className="flex flex-col items-center md:pt-8 md:gap-8 p-2">
-      <div className="flex flex-col gap-4">
-        <h4 className="font-sohne-halbfett md:text-5xl text-3xl text-[#3D4637] ">
+    <div className="flex flex-col items-center md:pt-12.5">
+      <div className="flex flex-col gap-4 w-full items-center">
+        <h4 className="font-sohne-halbfett md:text-[60px] text-3xl text-[#3D4637] ">
           Shop Your Luggage
         </h4>
-        <p className="text-black font-sans md:text-lg text-base leading-tight text-center font-normal">
+        <p className="text-black font-sans md:text-[20px] text-base leading-tight text-center font-normal">
           Different journeys demand different luggage. <br /> Choose by size,
           collection, or how you travel.
         </p>
-        <div className="md:mt-4 mt-2 flex flex-row md:items-center gap-4">
+        <div className="md:mt-4 mt-2 flex flex-row  md:items-center gap-4">
           {
             categories.map((c, index) => <Button key={`button_${index}`} isActive={categorytype === c.category} onClick={() => setCategorytype(c.category)} >{c.label}</Button>)
           }
         </div>
       </div>
-      <div className="md:mt-0 mt-4 grid md:grid-cols-4 gap-3 w-full">
+      <div className="md:mt-[40px] mt-4 grid md:grid-cols-4 gap-3 w-full">
         {images.map((img: any, index) => (
           <Image
             alt={img.image}
-            className="md:h-125 h-100 object-cover w-full rounded-xs"
+            className="md:h-[720px] h-100 object-cover w-full rounded-xs"
             height={300}
             width={400}
             src={img.image}
@@ -69,7 +72,7 @@ export function ShopYourLuggage() {
         ))}
       </div>
       <div className="flex w-full justify-center items-center">
-        <button className="md:w-1/4 w-full md:mt-0 mt-4 font-sans font-normal text-white text-base bg-[#304B39] p-4">Shop All</button>
+        <button className="md:w-1/4 w-full md:mt-[40px] mt-4 font-sans font-normal text-white text-base bg-[#304B39] p-4 rounded-sm">Shop All</button>
       </div>
     </div>
   );

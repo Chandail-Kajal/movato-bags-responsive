@@ -17,14 +17,14 @@ export type Section = {
 export function FooterColumn({ title, links }: Section) {
     return (
         <div className="flex flex-col gap-4">
-            <h3 className="text-lime-400 font-semibold font-sohne-dreivierfett text-xl">{title}</h3>
+            <h3 className="text-[#B9D531] font-semibold font-sohne-dreivierfett text-2xl">{title}</h3>
             <div className="flex flex-col gap-2">
                 {links.map((item, index) => {
                     if (typeof item === "string") {
                         return (
                             <p
                                 key={index}
-                                className="text-gray-300 text-sm hover:text-white cursor-pointer"
+                                className="text-gray-300 text-lg hover:text-white cursor-pointer"
                             >
                                 {item}
                             </p>
@@ -33,10 +33,10 @@ export function FooterColumn({ title, links }: Section) {
 
                     return (
                         <div key={index}>
-                            <p className="text-gray-300 text-xl hover:text-white cursor-pointer font-sans">
+                            <p className="text-gray-300 text-2xl hover:text-white cursor-pointer font-sans">
                                 {item.title}
                             </p>
-                            <span className="text-xs font-sans text-gray-300">
+                            <span className="text-lg font-sans text-gray-300">
                                 {item.caption}
                             </span>
                         </div>
@@ -146,7 +146,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-[#304B39] text-white md:px-10 md:py-12 px-4 py-2 relative overflow-hidden">
+        <footer className="bg-[#304B39] text-white md:px-10 md:py-12 px-4 py-2 relative overflow-hidden " style={{backgroundImage:'url("/assets/Website-Footer.png")'}}>
             <div className="absolute inset-0 opacity-20 -z-10">
                 <Image
                     src="/assets/images/header-1.jpeg"
@@ -166,13 +166,13 @@ export default function Footer() {
                             height={60}
                             alt="footer"
                         />
-                        <p className="text-sm text-gray-300 mt-6">
+                        <p className="text-sm text-gray-300 mt-6 leading-normal">
                             Movato designs performance-driven <br />
                             luggage for real travel, from daily work trips <br />
                             to long journeys. Thoughtfully engineered. Rigorously tested.
                             Built to move with you—wherever life takes you.
                         </p>
-                        <h1 className="pt-8">#BuiltToPerform</h1>
+                        <h1 className="pt-8 leading-normal">#BuiltToPerform</h1>
                     </div>
 
 
@@ -184,8 +184,8 @@ export default function Footer() {
                     </div>
 
 
-                    <div className="font-sans">
-                        <h3 className="text-lime-400 font-semibold text-xl">
+                    <div className="font-sans leading-normal">
+                        <h3 className="text-[#B9D531] font-semibold text-xl font-sohne-dreivierfett">
                             CUSTOMER SUPPORT
                         </h3>
                         <p className="text-sm text-gray-300 mt-2">
@@ -201,7 +201,7 @@ export default function Footer() {
 
 
                     <div className="font-sans">
-                        <h3 className="text-lime-400 font-semibold text-xl">
+                        <h3 className="text-[#B9D531] font-semibold text-xl font-sohne-dreivierfett">
                             STAY UPDATED
                         </h3>
                         <div className="flex mt-2 bg-white">

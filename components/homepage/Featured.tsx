@@ -10,8 +10,9 @@ const ImageCard = ({
   caption: string;
 }) => {
   return (
-    <div className="flex flex-col gap-3 md:w-48">
-      <div className="relative md:h-48 h-60 overflow-hidden rounded-lg">
+    <div className="flex flex-col
+     gap-3  md:w-50.5 ">
+      <div className="relative md:h-51.5 h-60 overflow-hidden rounded-lg">
         <Image
           src={img}
           alt={imgTitle}
@@ -23,19 +24,19 @@ const ImageCard = ({
           className="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none"
           style={{
             WebkitMaskImage:
-              "linear-gradient(to top, black 0%, black 20%, transparent 100%)",
+              "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
             maskImage:
-              "linear-gradient(to top, black 0%, black 20%, transparent 100%)",
+              "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
           }}
         ></div>
         <div className="absolute inset-x-0 bottom-0 h-[80%] bg-linear-to-t from-black/70 to-transparent pointer-events-none" />
-        <h3 className="absolute bottom-4 left-4 z-10 w-1/2 leading-tight text-lg font-semibold text-white font-sohne-halbfett antialiased">
+        <h3 className="absolute bottom-4 left-4 z-10 w-[80%] leading-tight md:text-[24px] font-semibold text-white font-sohne-halbfett antialiased">
           {imgTitle}
         </h3>
       </div>
-      <p className="font-sans text-sm text-[#D9D9D6]">
+      <p className="font-sans md:text-[16px] text-[#D9D9D6]">
         {caption}
       </p>
     </div>
@@ -69,15 +70,15 @@ export function Featured() {
     },
   ];
   return (
-    <div className="bg-[#25282A] rounded-3xl md:px-8 md:py-16 p-4 flex w-full md:flex-row flex-col justify-between items-center gap-0">
+    <div className="bg-[#25282A] rounded-[30px] py-25 px-10 flex w-full md:flex-row flex-col justify-between items-center gap-0">
       <div className="flex flex-col gap-4">
-        <h4 className="text-5xl text-[#DB6B30] font-semibold font-sohne-dreivierfett uppercase tracking-wider">
+        <h4 className="md:text-[44px] text-[#DB6B30] font-semibold font-sohne-dreivierfett uppercase leading-14">
           Engineered for <br /> real-world travel.
         </h4>
-        <p className="text-2xl font-sans text-[#D9D9D6] tracking-wider">
-          Every Movato component is stress-tested to perform <br /> in
-          high-friction environments —from cobblestone <br /> streets to airport
-          cargo holds.
+        <p className="md:text-[24px] font-sans text-[#D9D9D6]">
+          Every Movato component is stress-tested to perform 
+          <br/>in high-friction environments  —from cobblestone 
+          <br />streets to airport cargo holds.
         </p>
       </div>
       <div className="col-span-2 grid md:grid-cols-4 md:mt-0 mt-4 gap-3 text-white">

@@ -118,7 +118,7 @@ export default function Header() {
     }
   }
   return (
-    <div className="sticky top-0 z-50 bg-white shadow-xl">
+    <div className="sticky top-0 z-50 bg-white shadow-sm">
       {isSidebarOpen && (
         <div className="fixed inset-0 z-50 text-gray-800 flex">
           <div
