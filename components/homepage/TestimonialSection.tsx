@@ -60,42 +60,42 @@ export default function TestimonialSection() {
   };
 
   return (
-    <section className="bg-[#2f4635] text-white md:py-20 md:px-10 px-4 py-4 " style={{backgroundImage:'url("/assets/rating-bg.svg")'}}>
-      <h2 className="md:text-4xl text-xl text-center md:mb-14 mb-4 font-sohne-halbfett text-[40px]">
+    <section className="bg-[#2f4635] text-white xl:py-20 xl:px-10 lg:max-xl:px-8 lg:max-xl:py-18 md:max-lg:py-14 md:max-lg:px-6 px-4 py-4 " style={{backgroundImage:'url("/assets/rating-bg.svg")'}}>
+      <h2 className="xl:text-4xl lg:max-xl:text-3xl md:max-lg:text-2xl text-xl text-center md:mb-14 mb-4 font-sohne-halbfett text-[40px]">
         Trusted By Travellers Who Expect More
       </h2>
 
       <div className="relative flex items-center justify-center">
         <button
           onClick={prev}
-          className="bg-[#d9d9d9] text-black w-12 h-12 rounded-full flex items-center justify-center"
+          className="bg-[#d9d9d9] text-black xl:w-12 xl:h-12 h-8 w-8 rounded-full flex items-center justify-center"
         >
           <ChevronLeft />
         </button>
 
-        <div className="grid md:grid-cols-3 w-full md:gap-8 px-8">
+        <div className="grid md:grid-cols-3 w-full md:gap-8 gap-4 px-8">
           {testimonials.map((item, i) => (
-            <div key={i} className="bg-[#E6E6DC] text-black p-10 rounded-md flex flex-col items-start justify-between">
+            <div key={i} className="bg-[#E6E6DC] text-black xl:p-10 lg:max-xl:p-8 md:max-lg:p-6 p-4 rounded-md flex flex-col items-start justify-between">
               <div className="mb-2">
                 <StarRating rating={item.rating} />
               </div>
-              <p className="text-[24px] leading-relaxed mb-6 font-sans">{item.text}</p>
-              <h3 className="text-[32px] font-semibold font-sohne-halbfett">{item.name}</h3>
-              <p className=" text-gray-700 font-[24px] font-sans">{item.role}</p>
+              <p className="xl:text-[24px] lg:max-xl:text-md text-sm leading-relaxed xl:mb-6 font-sans">{item.text}</p>
+              <h3 className="xl:text-[32px] lg:max-xl:text-lg md:max-lg:text-md text-base font-semibold font-sohne-halbfett">{item.name}</h3>
+              <p className=" text-gray-700 xl:text-[24px] lg:max-xl:text-md text-sm font-sans">{item.role}</p>
             </div>
           ))}
         </div>
 
         <button
           onClick={next}
-          className="bg-[#d9d9d9] text-black w-12 h-12 rounded-full flex items-center justify-center"
+          className="bg-[#d9d9d9] text-black xl:w-12 xl:h-12 h-8 w-8 rounded-full flex items-center justify-center"
         >
           <ChevronRight />
         </button>
       </div>
 
       <div className="flex justify-center md:mt-12 mt-4">
-        <button className="border border-white px-[100px] py-[20px] hover:bg-white hover:text-black transition">
+        <button className="border border-white xl:px-[100px] xl:py-[20px] lg:max-xl:py-4 lg:max-xl:px-30 py-2 px-10 hover:bg-white hover:text-black transition">
           Read All Reviews
         </button>
       </div>
