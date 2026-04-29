@@ -12,10 +12,9 @@ const Button = ({
   return (
     <button
       onClick={onClick}
-      className={`xl:text-[20px] lg:max-xl::text-base text-sm flex-1 font-sans border-2 border-[#3D4637] text-[#304B39] flex items-center justify-center text-center text-nowrap rounded-xs 
+      className={`xl:text-[20px] lg:text-base text-sm flex-1 font-sans border-2 border-[#3D4637] text-[#304B39] flex items-center justify-center text-center text-nowrap rounded-xs 
 xl:px-4 xl:py-3
-md:max-lg:px-4 md:max-lg:py-2.5 
-sm:max-md:px-3 sm:max-md:py-2 
+md:px-4 md:py-2.5 
 px-2 py-1
 ${isActive && "font-medium border-3"}`}>
       {children}
@@ -47,7 +46,7 @@ export function ShopYourLuggage() {
   return (
     <div className="flex flex-col items-center md:pt-12.5">
       <div className="flex flex-col gap-4 w-full items-center">
-        <h4 className="font-sohne-halbfett  md:max-lg:text-4xl lg:max-xl:text-5xl xl:text-[60px] text-3xl text-[#3D4637] ">
+        <h4 className="font-sohne-halbfett  md:text-4xl lg:text-5xl xl:text-[60px] text-3xl text-[#3D4637] ">
           Shop Your Luggage
         </h4>
         <p className="text-black font-sans text-sm lg:max-xl:text-base xl:text-[20px] leading-tight text-center font-normal">
