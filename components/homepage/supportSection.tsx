@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import icon1 from "@/assets/icons/icon-1.svg";
 import React from "react";
 
 export default function SupportSection() {
@@ -36,19 +35,19 @@ export default function SupportSection() {
 
   return (
     <section className="md:px-0 md:pt-10 px-4 py-2">
-      <div className="md:grid md:grid-cols-2 md:gap-16 items-center flex flex-col">
-        <div>
-          <h1 className="xl:text-[60px] lg:max-xl:text-5xl md:max-lg::text-4xl text-3xl font-sohne-halbfett text-[#2f4635] leading-tight whitespace-pre-wrap">
+      <div className="md:grid md:grid-cols-2 md:gap-16 items-center flex flex-col ">
+        <div className="md:w-full">
+          <h1 className="xl:text-[60px] lg:max-xl:text-5xl md:text-4xl font-semibold text-3xl font-sohne-halbfett text-[#2f4635] leading-tighter whitespace-pre-wrap">
             {data.heading}
           </h1>
-          <p className="text-gray-600 md:mt-4 xl:text-[24px] lg:max-xl:text-lg md:max-lg:text-md text-base max-w-xl">
+          <p className="text-[#304B39] md:mt-4 xl:text-[24px] lg:max-xl:text-lg md:max-lg:text-md text-base max-w-xl md:text-[18px]">
             {data.subheading}
           </p>
           <div className="flex md:flex-row md:gap-10 mt-10 flex-col gap-4 xl:gap-2">
             {data.features.map((feature, index) => (
               <div key={index} className="flex flex-col xl:gap-6 gap-2">
                 <Image alt={feature.title} className="xl:h-17.5 xl:w-17.5 h-14 w-14 text-black" src={feature.path} width={100} height={100}></Image>
-                <h3 className="text-orange-500 font-sans w-[80%] font-semibold lg:max-xl:text-md text-sm xl:text-[24px] uppercase">
+                <h3 className="text-[#DB6B30]  font-sans w-[80%] font-semibold lg:max-xl:text-md text-sm xl:text-[24px] uppercase">
                   {feature.title}
                 </h3>
                 <p className="text-[#304B39] lg:max-xl:text-sm text-xs xl:text-[16px] w-[80%] leading-relaxed">

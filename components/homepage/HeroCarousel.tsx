@@ -48,13 +48,13 @@ export function HeroCarousel({ slides }: Props) {
               className="w-full h-72 md:max-lg:h-120 lg:h-200 object-cover"
             />
 
-            <div className="md:absolute md:inset-0 flex items-end md:ml-10 md:m-5">
-              <div className="md:w-[35%] w-full text-[#3D4637] flex flex-col gap-2">
-                <h1 className="font-black font-sohne-extrafett uppercase xl:text-[110px] xl:leading-24 lg:text-7xl lg:leading-18 md:text-6xl md:leading-14 text-3xl">
+            <div className="md:absolute md:inset-0 flex items-end md:ml-10 md:mt-28 ">
+              <div className="md:w-[35%] w-full text-[#3D4637] flex flex-col md:mt-18">
+                <h1 className="font-black font-sohne-extrafett uppercase xl:text-[110px] xl:leading-24 lg:text-7xl lg:leading-18 md:text-6xl md:leading-16 text-3xl ">
                   {slide.title}
                 </h1>
 
-                <p className="text-base xl:text-[24px] lg:text-lg md:text-md font-sans font-medium leading-tight md:mt-3 text-gray-700">
+                <p className="text-base xl:text-[24px] lg:text-lg md:text-sm md:pt-2 font-sans font-medium leading-4  text-[#28381d]">
                   {slide.description}
                 </p>
 
@@ -66,7 +66,7 @@ export function HeroCarousel({ slides }: Props) {
                   )}
 
                   {slide.secondaryBtn && (
-                    <button className="bg-white/70 backdrop-blur px-6 xl:py-5 lg:py-4 py-3 border rounded-sm">
+                    <button className="bg-white/70 backdrop-blur px-6 xl:py-5 lg:py-4 py-3 border rounded-sm ">
                       {slide.secondaryBtn}
                     </button>
                   )}

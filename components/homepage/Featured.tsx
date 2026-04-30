@@ -12,20 +12,20 @@ const ImageCard = ({
   return (
     <div
       className="
-        flex flex-col gap-3 
+        flex flex-col gap-1 
         w-full
         md:w-38
         lg:w-40
-        xl:w-[202px]
+        xl:w-50.5
       "
     >
       <div
         className="
-          relative overflow-hidden rounded-lg
+          relative overflow-hidden rounded
           h-60
           md:h-36
           lg:h-38
-          xl:h-[206px]
+          xl:h-51.5
         "
       >
         <Image
@@ -33,7 +33,7 @@ const ImageCard = ({
           alt={imgTitle}
           className="w-full h-full object-cover"
           height={500}
-          width={300}
+          width={400}
         />
         <div
           className="absolute bottom-0 left-0 right-0 h-[30%] pointer-events-none"
@@ -46,7 +46,7 @@ const ImageCard = ({
             WebkitBackdropFilter: "blur(12px)",
           }}
         />
-        <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-[80%] bg-linear-to-t from-black/70 to-transparent pointer-events-none" />
         <h3
           className="
             absolute bottom-4 left-4 z-10 w-[80%]
@@ -62,7 +62,8 @@ const ImageCard = ({
       <p
         className="
           font-sans text-[#D9D9D6]
-          text-xs
+          md:ml-2
+          text-[10px]
           lg:text-sm
           xl:text-[16px]
         "
@@ -77,7 +78,7 @@ export function Featured() {
   const features: { img: string; imgTitle: string; caption: string }[] = [
     {
       img: "/assets/images/feature-1.svg",
-      imgTitle: "Airport Handling",
+      imgTitle: "Airport",
       caption:
         "Built to handle constant handling across check-in counters and baggage belts.",
     },
@@ -102,17 +103,17 @@ export function Featured() {
   ];
   return (
     <div className="bg-[#25282A] rounded-[30px] xl:py-25 lg:py-22 lg:px-8 md:px-6 md:py-20 xl:px-10 flex w-full md:flex-row flex-col justify-between items-center gap-0">
-      <div className="flex flex-col gap-4">
-        <h4 className="text-xl md:text-2xl lg:text-3xl xl:text-[44px] text-[#DB6B30] font-semibold font-sohne-dreivierfett uppercase xl:leading-14 lg:leading-12 md:leading-10">
+      <div className="flex flex-col gap-3 md:mr-20">
+        <h4 className="text-xl md:text-3xl md:tracking-wider lg:text-3xl xl:text-[44px] text-[#DB6B30] font-semibold font-sohne-dreivierfett uppercase xl:leading-14 lg:leading-12 md:leading-10">
           Engineered for <br /> real-world travel.
         </h4>
-        <p className="text-md xl:text-[24px] lg:text-lg font-sans text-[#D9D9D6]">
+        <p className="text-md xl:text-[24px] lg:text-lg font-sans text-[#D9D9D6] md:tracking-wide">
           Every Movato component is stress-tested to perform
           <br />in high-friction environments  —from cobblestone
           <br />streets to airport cargo holds.
         </p>
       </div>
-      <div className="col-span-2 grid md:grid-cols-4 md:mt-0 mt-4 gap-3 text-white">
+      <div className="col-span-2 grid md:grid-cols-4 md:mt-0 mt-4 gap-2 text-white">
         {features.map((f, index) => (
           <ImageCard key={`feature-${index}`} {...f} />
         ))}

@@ -32,24 +32,24 @@ export default function HelpSection() {
   };
 
   return (
-    <div className="w-full py-20 bg-[#F5F5F5] flex flex-col items-center">
+    <div className="w-full py-20 bg-white flex flex-col items-center md:pt-0 md:mt-0 ">
       
 
       <h2
-        className="text-3xl font-semibold text-[#3D4637] cursor-pointer"
+        className="text-3xl font-semibold text-[#3D4637] cursor-pointer font-sohne-halbfett"
         onClick={() => setShowChat(true)}
       >
         Still have a question?
       </h2>
 
-      <p className="text-gray-600 mt-2 mb-6">
+      <p className="text-[#3D4637] mt-2 mb-6 font-sans font-semibold">
         We'd love to answer.
       </p>
 
 
       <button
         onClick={handleSupportClick}
-        className="border border-[#3D4637] px-6 py-3 rounded-lg hover:bg-[#3D4637] hover:text-white transition"
+        className="border border-[#3D4637] px-6 py-3  rounded-lg hover:bg-[#3D4637] hover:text-white transition"
       >
         Contact Customer Support
       </button>

@@ -88,7 +88,7 @@ export default function FAQ() {
           return (
             <div key={index} className="border-b border-gray-300 pb-4">
               
-              {/* Question */}
+              
               <div
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggleFAQ(index)}
@@ -108,7 +108,7 @@ export default function FAQ() {
                   isOpen ? "max-h-40 mt-3" : "max-h-0"
                 }`}
               >
-                <p className="text-black text-sm leading-relaxed font-sans">
+                <p className="text-black text-[17px] leading-tight tracking-wide font-sans">
                   {item.answer}
                 </p>
               </div>

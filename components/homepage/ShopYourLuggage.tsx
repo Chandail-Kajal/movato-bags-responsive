@@ -59,11 +59,11 @@ export function ShopYourLuggage() {
           }
         </div>
       </div>
-      <div className="md:mt-[40px] mt-4 grid md:grid-cols-4 gap-3 w-full">
+      <div className="md:mt-10 mt-4 grid md:grid-cols-4 gap-3 w-full">
         {images.map((img: any, index) => (
           <Image
             alt={img.image}
-            className="h-50 md:max-lg:h-80 lg:max-xl:h-100 xl:h-[720px] object-cover w-full rounded-xs"
+            className="h-50 md:max-lg:h-80 lg:max-xl:h-100 xl:h-180 object-cover w-full rounded-xs"
             height={300}
             width={400}
             src={img.image}

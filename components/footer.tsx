@@ -17,26 +17,27 @@ export type Section = {
 export function FooterColumn({ title, links }: Section) {
     return (
         <div className="flex flex-col gap-4">
-            <h3 className="text-[#B9D531] font-semibold font-sohne-dreivierfett text-2xl">{title}</h3>
+            <h3 className="text-[#B9D531] font-semibold font-sohne-dreivierfett text-md">{title}</h3>
             <div className="flex flex-col gap-2">
                 {links.map((item, index) => {
                     if (typeof item === "string") {
                         return (
                             <p
                                 key={index}
-                                className="text-gray-300 text-lg hover:text-white cursor-pointer"
+                                className="text-gray-300 text-sm hover:text-white cursor-pointer"
                             >
                                 {item}
                             </p>
                         );
-                    }
+                    } 
+                    
 
                     return (
                         <div key={index}>
-                            <p className="text-gray-300 text-2xl hover:text-white cursor-pointer font-sans">
+                            <p className="text-gray-300 text-2xl md:text-md hover:text-white cursor-pointer font-sans">
                                 {item.title}
                             </p>
-                            <span className="text-lg font-sans text-gray-300">
+                            <span className="text-xs font-sans text-gray-300">
                                 {item.caption}
                             </span>
                         </div>
@@ -166,42 +167,42 @@ export default function Footer() {
                             height={60}
                             alt="footer"
                         />
-                        <p className="text-sm text-gray-300 mt-6 leading-normal">
+                        <p className="text-xs text-white mt-6 leading-tight tracking-wide">
                             Movato designs performance-driven <br />
                             luggage for real travel, from daily work trips <br />
                             to long journeys. Thoughtfully engineered. Rigorously tested.
                             Built to move with you—wherever life takes you.
                         </p>
-                        <h1 className="pt-8 leading-normal">#BuiltToPerform</h1>
+                        <h1 className="pt-3 leading-normal">#BuiltToPerform</h1>
                     </div>
 
 
-                    <div className="flex gap-3">
-                        <div className="w-10 h-10 bg-[#2B2F33] rounded"></div>
-                        <div className="w-10 h-10 bg-[#2B2F33] rounded"></div>
-                        <div className="w-10 h-10 bg-[#2B2F33] rounded"></div>
-                        <div className="w-10 h-10 bg-[#2B2F33] rounded"></div>
+                    <div className="flex gap-3 ">
+                        <div className="w-12 h-12 bg-[#2B2F33] rounded"></div>
+                        <div className="w-12 h-12 bg-[#2B2F33] rounded"></div>
+                        <div className="w-12 h-12 bg-[#2B2F33] rounded"></div>
+                        <div className="w-12 h-12 bg-[#2B2F33] rounded"></div>
                     </div>
 
 
                     <div className="font-sans leading-normal">
-                        <h3 className="text-[#B9D531] font-semibold text-xl font-sohne-dreivierfett">
+                        <h3 className="text-[#B9D531] font-semibold text-md font-sohne-dreivierfett leading-tight">
                             CUSTOMER SUPPORT
                         </h3>
-                        <p className="text-sm text-gray-300 mt-2">
+                        <p className="text-xs text-gray-300 mt-2">
                             Call/WhatsApp: +91 99999 99999
                         </p>
-                        <p className="text-sm text-gray-300 ">
+                        <p className="text-xs text-gray-300 ">
                             Email: support@movatobags.com
                         </p>
-                        <p className="text-sm text-gray-300 ">
+                        <p className="text-xs text-gray-300 ">
                             Monday - Saturday / 10 AM - 7 PM
                         </p>
                     </div>
 
 
                     <div className="font-sans">
-                        <h3 className="text-[#B9D531] font-semibold text-xl font-sohne-dreivierfett">
+                        <h3 className="text-[#B9D531] font-semibold md:text-md font-sohne-dreivierfett">
                             STAY UPDATED
                         </h3>
                         <div className="flex mt-2 bg-white">
@@ -212,7 +213,7 @@ export default function Footer() {
                             />
                             <button className="bg-[#2F392D] px-4">→</button>
                         </div>
-                        <p className="mt-6 text-sm text-gray-300">
+                        <p className="mt-6 text-xs text-gray-300">
                             Product launches, performance insights, and travel stories —
                             straight from the Movato team. No spam. No noise.
                         </p>

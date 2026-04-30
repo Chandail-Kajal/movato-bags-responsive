@@ -16,11 +16,11 @@ function StarRating({ rating }: { rating: number }) {
     <div className="flex gap-1">
       {[1, 2, 3, 4, 5].map((star) => {
         if (rating >= star) {
-          return <FaStar key={star} className="text-black" size={22} />;
+          return <FaStar key={star} className="text-[#3D4637]" size={22} />;
         } else if (rating >= star - 0.5) {
-          return <FaStarHalfAlt key={star} className="text-black" size={22} />;
+          return <FaStarHalfAlt key={star} className="text-[#3D4637]" size={22} />;
         } else {
-          return <FaRegStar key={star} className="text-gray-400" size={22} />;
+          return <FaRegStar key={star} className="text-[#3D4637]" size={22} />;
         }
       })}
     </div>
@@ -80,8 +80,8 @@ export default function TestimonialSection() {
                 <StarRating rating={item.rating} />
               </div>
               <p className="xl:text-[24px] lg:max-xl:text-md text-sm leading-relaxed xl:mb-6 font-sans">{item.text}</p>
-              <h3 className="xl:text-[32px] lg:max-xl:text-lg md:max-lg:text-md text-base font-semibold font-sohne-halbfett">{item.name}</h3>
-              <p className=" text-gray-700 xl:text-[24px] lg:max-xl:text-md text-sm font-sans">{item.role}</p>
+              <h3 className="xl:text-[32px] lg:max-xl:text-lg md:max-lg:text-md text-base font-semibold font-sohne-halbfett md:mt-4">{item.name}</h3>
+              <p className=" text-black xl:text-[24px] lg:max-xl:text-md text-sm font-sans">{item.role}</p>
             </div>
           ))}
         </div>
@@ -95,7 +95,7 @@ export default function TestimonialSection() {
       </div>
 
       <div className="flex justify-center md:mt-12 mt-4">
-        <button className="border border-white xl:px-[100px] xl:py-[20px] lg:max-xl:py-4 lg:max-xl:px-30 py-2 px-10 hover:bg-white hover:text-black transition">
+        <button className="border border-white xl:px-25 xl:py-5 lg:max-xl:py-4 lg:max-xl:px-30 py-2 px-10 hover:bg-white hover:text-black transition">
           Read All Reviews
         </button>
       </div>
