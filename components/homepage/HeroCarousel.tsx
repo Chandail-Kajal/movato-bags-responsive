@@ -54,7 +54,7 @@ export function HeroCarousel({ slides }: Props) {
                   {slide.title}
                 </h1>
 
-                <p className="text-base w-full xl:text-[24px] lg:text-[17px] md:text-md md:leading-5.5 md:mt-2 font-sans font-medium leading-4  text-[#28381d]">
+                <p className="text-base w-full xl:text-[24px] lg:text-[16px] md:text-md md:leading-5.5 md:mt-2 font-sans font-medium leading-3  text-[#28381d]">
                   {slide.description}
                 </p>
 

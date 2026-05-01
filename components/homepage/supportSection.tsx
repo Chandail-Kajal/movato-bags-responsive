@@ -40,7 +40,7 @@ export default function SupportSection() {
           <h1 className="xl:text-[60px] lg:max-xl:text-5xl md:text-[42px] md:leading-10 lg:leading-12 font-semibold text-3xl font-sohne-halbfett text-[#2f4635] leading-tighter whitespace-pre-wrap">
             {data.heading}
           </h1>
-          <p className="text-[#304B39] md:w-[80%] lg:w-[85%] md:text-md md:leading-tight md:mt-3 xl:text-[24px] lg:text-lg  text-base">
+          <p className="text-[#304B39] md:w-[80%] lg:w-[85%] md:text-md md:leading-tight md:mt-3 xl:text-[24px] lg:text-[18px]  text-base">
             {data.subheading}
           </p>
           <div className="flex md:flex-row justify-start md:gap-8 md:mt-6 lg:gap-10 lg:mt-10 mt-10 flex-col gap-4 xl:gap-2">
