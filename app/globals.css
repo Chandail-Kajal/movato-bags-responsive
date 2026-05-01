@@ -71,6 +71,7 @@
   --breakpoint-md: 1280px;
   --breakpoint-lg: 1366px;
   --breakpoint-xl: 1920px;
+  --breakpoint-2xl: 2560px;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

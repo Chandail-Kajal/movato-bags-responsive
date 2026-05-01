@@ -10,8 +10,6 @@ type FAQItem = {
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  
   const faqData: FAQItem[] = [
     {
       question: "Is Movato a reliable luggage brand?",
@@ -33,13 +31,13 @@ export default function FAQ() {
       answer:
         "Rugged utility luggage is built to handle rough surfaces, and repeated lifting, making it more reliable over time.",
     },
-    
+
     {
       question: "What kind of warranty does Movato offer on its products ?",
       answer:
         "Movato offers a 3-year international warranty covering manufacturing defects under normal use.",
     },
-    
+
     {
       question: "How does Movato test its luggage for durability ?",
       answer:
@@ -55,7 +53,7 @@ export default function FAQ() {
       answer:
         "Most orders are delivered within 3–7 business days, depending on location.",
     },
-    
+
     {
       question: "What is the return and refund policy for Movato bags?",
       answer:
@@ -73,46 +71,34 @@ export default function FAQ() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-6 py-16">
-      
-      
-      <h2 className="text-3xl md:text-4xl font-semibold text-center text-[#3D4637] mb-12">
+    <div className="w-full md:max-w-5xl lg:px-2 lg:py-20 mx-auto px-6 py-16">
+      <h2 className="text-3xl md:text-[26px] lg:text-[28px] font-sohne-halbfett font-semibold text-center text-[#3D4637] mb-12">
         Frequently Asked Questions
       </h2>
-
-     
       <div className="space-y-6">
         {faqData.map((item, index) => {
           const isOpen = openIndex === index;
-
           return (
-            <div key={index} className="border-b border-gray-300 pb-4">
-              
-              
+            <div key={index} className="border-b font-sans border-gray-200 pb-4">
               <div
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggleFAQ(index)}
               >
-                <h3 className="text-lg font-medium text-black">
+                <h3 className="text-lg md:text-base lg:text-[17px] font-semibold text-black">
                   {item.question}
                 </h3>
-
-                <div className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-400">
+                <div className="w-8 h-8 flex items-center justify-center rounded-xl shadow-xs border border-gray-100">
                   {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                 </div>
               </div>
-
-         
               <div
-                className={`transition-all duration-300 overflow-hidden ${
-                  isOpen ? "max-h-40 mt-3" : "max-h-0"
-                }`}
+                className={`transition-all duration-300 overflow-hidden ${isOpen ? "max-h-40 mt-3" : "max-h-0"
+                  }`}
               >
-                <p className="text-black text-[17px] leading-tight tracking-wide font-sans">
+                <p className="text-black text-[17px] md:text-base lg:text-[17px] leading-tight tracking-wide font-sans">
                   {item.answer}
                 </p>
               </div>
-
             </div>
           );
         })}

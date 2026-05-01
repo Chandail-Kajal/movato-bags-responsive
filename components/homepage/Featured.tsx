@@ -14,8 +14,8 @@ const ImageCard = ({
       className="
         flex flex-col gap-1 
         w-full
-        md:w-38
-        lg:w-40
+        md:w-40
+        lg:w-42
         xl:w-50.5
       "
     >
@@ -23,8 +23,8 @@ const ImageCard = ({
         className="
           relative overflow-hidden rounded
           h-60
-          md:h-36
-          lg:h-38
+          md:h-35
+          lg:h-38 
           xl:h-51.5
         "
       >
@@ -49,9 +49,10 @@ const ImageCard = ({
         <div className="absolute inset-x-0 bottom-0 h-[80%] bg-linear-to-t from-black/70 to-transparent pointer-events-none" />
         <h3
           className="
-            absolute bottom-4 left-4 z-10 w-[80%]
+            absolute bottom-4 left-4 md:left-3 md:bottom-3 z-10 w-[80%]
             font-semibold text-white font-sohne-halbfett antialiased leading-tight
             text-sm
+            md:text-base
             lg:text-base
             xl:text-[24px]
           "
@@ -62,9 +63,10 @@ const ImageCard = ({
       <p
         className="
           font-sans text-[#D9D9D6]
-          md:ml-2
+          md:ml-2.5
+          md:leading-3.5
+          md:mt-1.5
           text-[10px]
-          lg:text-sm
           xl:text-[16px]
         "
       >
@@ -102,15 +104,15 @@ export function Featured() {
     },
   ];
   return (
-    <div className="bg-[#25282A] rounded-[30px] xl:py-25 lg:py-22 lg:px-8 md:px-6 md:py-20 xl:px-10 flex w-full md:flex-row flex-col justify-between items-center gap-0">
-      <div className="flex flex-col gap-3 md:mr-20">
-        <h4 className="text-xl md:text-3xl md:tracking-wider lg:text-3xl xl:text-[44px] text-[#DB6B30] font-semibold font-sohne-dreivierfett uppercase xl:leading-14 lg:leading-12 md:leading-10">
-          Engineered for <br /> real-world travel.
+    <div className="bg-[#25282A] md:rounded-2xl xl:py-25 lg:py-18 lg:px-9 md:px-8 md:py-16 xl:px-10 flex w-full md:flex-row flex-col justify-between items-center gap-0">
+      <div className="flex flex-col gap-3 md:mr-20 lg:pr-0 md:w-[35%] lg:w-[37%]">
+        <h4 className="text-xl [hyphens:none] md:text-[29px] lg:text-3xl xl:text-[44px] text-[#DB6B30] font-semibold font-sohne-dreivierfett uppercase xl:leading-14 md:leading-8">
+          Engineered for real&#8209;world travel.
         </h4>
-        <p className="text-md xl:text-[24px] lg:text-lg font-sans text-[#D9D9D6] md:tracking-wide">
+        <p className="text-md md:font-thin md:leading-5 xl:text-[24px] lg:text-lg font-sans text-[#D9D9D6]">
           Every Movato component is stress-tested to perform
-          <br />in high-friction environments  —from cobblestone
-          <br />streets to airport cargo holds.
+          in high-friction environments  —from cobblestone
+          streets to airport cargo holds.
         </p>
       </div>
       <div className="col-span-2 grid md:grid-cols-4 md:mt-0 mt-4 gap-2 text-white">

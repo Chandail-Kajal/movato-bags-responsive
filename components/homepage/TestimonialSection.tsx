@@ -16,11 +16,11 @@ function StarRating({ rating }: { rating: number }) {
     <div className="flex gap-1">
       {[1, 2, 3, 4, 5].map((star) => {
         if (rating >= star) {
-          return <FaStar key={star} className="text-[#3D4637]" size={22} />;
+          return <FaStar key={star} className="text-[#3D4637] md:size-4" size={22} />;
         } else if (rating >= star - 0.5) {
-          return <FaStarHalfAlt key={star} className="text-[#3D4637]" size={22} />;
+          return <FaStarHalfAlt key={star} className="text-[#3D4637] md:size-4" size={22} />;
         } else {
-          return <FaRegStar key={star} className="text-[#3D4637]" size={22} />;
+          return <FaRegStar key={star} className="text-[#3D4637] md:size-4" size={22} />;
         }
       })}
     </div>
@@ -60,7 +60,7 @@ export default function TestimonialSection() {
   };
 
   return (
-    <section className="bg-[#2f4635] text-white xl:py-20 xl:px-10 lg:max-xl:px-8 lg:max-xl:py-18 md:max-lg:py-14 md:max-lg:px-6 px-4 py-4 " style={{backgroundImage:'url("/assets/rating-bg.svg")'}}>
+    <section className="bg-[#2f4635] text-white xl:py-20 xl:px-10 lg:px-8 md:py-14 md:px-6 px-4 py-4 " style={{backgroundImage:'url("/assets/rating-bg.svg")'}}>
       <h2 className="xl:text-4xl lg:max-xl:text-3xl md:max-lg:text-2xl text-xl text-center md:mb-14 mb-4 font-sohne-halbfett text-[40px]">
         Trusted By Travellers Who Expect More
       </h2>
@@ -68,27 +68,27 @@ export default function TestimonialSection() {
       <div className="relative flex items-center justify-center">
         <button
           onClick={prev}
-          className="bg-[#d9d9d9] text-black xl:w-12 xl:h-12 h-8 w-8 rounded-full flex items-center justify-center"
+          className="bg-[#d9d9d9] text-black xl:w-12 xl:h-12 md:h-11 md:w-12 h-8 w-8 rounded-full flex items-center justify-center"
         >
           <ChevronLeft />
         </button>
 
-        <div className="grid md:grid-cols-3 w-full md:gap-8 gap-4 px-8">
+        <div className="grid md:grid-cols-3 w-full md:gap-4 gap-4 px-4">
           {testimonials.map((item, i) => (
-            <div key={i} className="bg-[#E6E6DC] text-black xl:p-10 lg:max-xl:p-8 md:max-lg:p-6 p-4 rounded-md flex flex-col items-start justify-between">
+            <div key={i} className="bg-[#E6E6DC] text-black xl:p-10 lg:max-xl:p-8 md:p-8 p-4 rounded-md flex flex-col items-start justify-between">
               <div className="mb-2">
-                <StarRating rating={item.rating} />
+                <StarRating  rating={item.rating} />
               </div>
-              <p className="xl:text-[24px] lg:max-xl:text-md text-sm leading-relaxed xl:mb-6 font-sans">{item.text}</p>
-              <h3 className="xl:text-[32px] lg:max-xl:text-lg md:max-lg:text-md text-base font-semibold font-sohne-halbfett md:mt-4">{item.name}</h3>
-              <p className=" text-black xl:text-[24px] lg:max-xl:text-md text-sm font-sans">{item.role}</p>
+              <p className="xl:text-[24px] md:text-[16px] md:leading-tight text-sm leading-relaxed xl:mb-6 font-sans">{item.text}</p>
+              <h3 className="xl:text-[32px] md:text-[20px] md:mt-6 text-base font-semibold font-sohne-halbfett">{item.name}</h3>
+              <p className=" text-black xl:text-[24px] lg:text-md md:text-[16px] text-sm font-sans">{item.role}</p>
             </div>
           ))}
         </div>
 
         <button
           onClick={next}
-          className="bg-[#d9d9d9] text-black xl:w-12 xl:h-12 h-8 w-8 rounded-full flex items-center justify-center"
+          className="bg-[#d9d9d9] text-black xl:w-12 xl:h-12 md:h-11 md:w-12 h-8 w-8 rounded-full flex items-center justify-center"
         >
           <ChevronRight />
         </button>

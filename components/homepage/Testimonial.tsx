@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Card = ({
   mainText,
   subText,
@@ -8,18 +10,25 @@ const Card = ({
   caption: string;
 }) => {
   return (
-    <div className="border xl:w-80 lg:w-65 md:w-60 border-[#E6E6DC] w-full py-4 px-6 bg-[url('/assets/cardsbg.svg')] bg-black/80 bg-cover bg-center bg-no-repeat ">
-      <div className="flex flex-col items-center">
-        <h5 className="text-[#DB6B30] xl:text-[48px] lg:text-2xl md:text-3xl leading-tight font-sans font-bold">
-          {mainText}
-        </h5>
-        <span className="text-[#DB6B30] xl:text-[20px] text-md leading-tight md:text-xs font-sans font-semibold ">
-          {subText}
-        </span>
+    <div className="border xl:w-80 lg:w-68 lg:h-36 md:w-64 md:h-34 md:rounded-sm overflow-hidden border-[#E6E6DC] w-full relative">
+      <div className="absolute inset-0 bg-black">
+        <Image src="/assets/cardbg.svg" alt="bg" height={400} width={600} className="object-cover h-full" />
       </div>
-      <p className="xl:text-[16px] lg:text-sm md:text-[11px] text-xs text-center leading-snug xl:mt-4 lg:mt-2 font-sans font-normal text-[#D9D9D6] md:mt-6">
-        {caption}
-      </p>
+      <div className="absolute inset-0 bg-black/85">
+        <div className="h-full w-full flex flex-col items-center justify-between items-center lg:px-10 lg:py-5 md:px-8 md:py-4 gap-0">
+          <div>
+            <h5 className="text-[#DB6B30] xl:text-[48px] md:text-3xl md:leading-5 font-sans font-bold">
+              {mainText}
+            </h5>
+            <span className="text-[#DB6B30] xl:text-[20px] lg:text-md leading-tight md:text-sm md:font-medium font-sans font-semibold ">
+              {subText}
+            </span>
+          </div>
+          <p className="xl:text-[16px] md:text-[11px] md:font-thin text-xs text-center leading-snug xl:mt-4 lg:mt-2 font-sans font-normal text-[#D9D9D6]">
+            {caption}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
@@ -53,21 +62,21 @@ export function Testimonial() {
   ];
 
   return (
-    <div className="bg-[#25282A] xl:px-22.5 xl:py-15 lg:px-20 lg:py-13 md:px-18 md:py-11 rounded-[30px] p-4 flex flex-col md:flex-row">
-      <div className="flex md:w-1/2 flex-col justify-between md:gap-12 ">
-        <h4 className="font-sans-dirt uppercase  md:text-6xl lg:text-6xl xl:text-[80px] xl:leading-22 lg:leading-14 md:leading-16 text-3xl text-[#D9D9D6] ">
+    <div className="bg-[#25282A] xl:px-22.5 xl:py-15 lg:px-26 md:px-24 md:py-14 md:rounded-2xl p-4 flex flex-col md:flex-row">
+      <div className="flex w-[44%] lg:w-[43%] flex-col justify-between">
+        <h4 className="font-sans-dirt uppercase  md:text-[52px] md:leading-14 lg:text-[57px] xl:text-[80px] xl:leading-22 lg:leading-16 text-3xl text-[#D9D9D6] ">
           Tested for everyday
           travel use.
         </h4>
-        <p className="xl:text-xl lg:text-lg md:text-md text-base font-sans font-normal text-white">
-          Movato suitcases are tested under controlled conditions <br /> to ensure consist performance across repeated trips and <br /> regular handling.
-          <span className="block mt-4 text-[8px]">
+        <p className="xl:text-xl lg:text-[17px] lg:leading-5 md:text-md md:tracking-wide md:font-thin md:leading-5 text-base font-sans font-normal text-white">
+          Movato suitcases are tested under controlled conditions to ensure consist performance across repeated trips and regular handling.
+          <span className="block mt-4 md:mt-2.5 md:text-[9px] md:font-thin md:tracking-tight">
             * Tests conducted under controlled conditions to simulate real-world
             conditions.
           </span>
         </p>
       </div>
-      <div className="flex-1 md:flex flex-row flex-wrap justify-end gap-4 mt-4 md:mt-0 ">
+      <div className="flex-1 md:flex flex-row flex-wrap justify-end md:gap-6 lg:gap-5 gap-4 mt-4 md:mt-0 ">
         {cards.map((card, index) => (
           <Card key={`testimonial_card_${index}`} {...card} />
         ))}

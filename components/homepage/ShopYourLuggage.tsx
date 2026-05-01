@@ -12,9 +12,10 @@ const Button = ({
   return (
     <button
       onClick={onClick}
-      className={`xl:text-[20px] lg:text-base text-sm flex-1 font-sans border-2 border-[#3D4637] text-[#304B39] flex items-center justify-center text-center text-nowrap rounded-xs 
+      className={`xl:text-[20px] text-[13px] flex-1 font-sans border-2 border-[#3D4637] text-[#304B39] flex items-center justify-center text-center text-nowrap rounded-xs 
 xl:px-4 xl:py-3
-md:px-4 md:py-2.5 
+md:px-6 md:py-1.5 md:rounded-xs
+lg:py-2 lg:rounded-sm
 px-2 py-1
 ${isActive && "font-medium border-3"}`}>
       {children}
@@ -45,11 +46,11 @@ export function ShopYourLuggage() {
 
   return (
     <div className="flex flex-col items-center md:pt-12.5">
-      <div className="flex flex-col gap-4 w-full items-center">
-        <h4 className="font-sohne-halbfett  md:text-4xl lg:text-5xl xl:text-[60px] text-3xl text-[#3D4637] ">
-          Shop Your Luggage
+      <div className="flex flex-col gap-4 md:gap-2 w-full items-center">
+        <h4 className="font-sohne-halbfett md:text-[38px] lg:text-[42px] xl:text-[60px] text-3xl text-[#3D4637] ">
+          Shop Your Luggage.
         </h4>
-        <p className="text-black font-sans text-sm lg:max-xl:text-base xl:text-[20px] leading-tight text-center font-normal">
+        <p className="text-black font-sans md:text-sm md:font-normal md:tracking-tighter text-sm xl:text-[20px] leading-tight text-center font-normal">
           Different journeys demand different luggage. <br /> Choose by size,
           collection, or how you travel.
         </p>
@@ -59,11 +60,11 @@ export function ShopYourLuggage() {
           }
         </div>
       </div>
-      <div className="md:mt-10 mt-4 grid md:grid-cols-4 gap-3 w-full">
+      <div className="md:mt-8 lg:mt-9 grid md:grid-cols-4 gap-3 w-full">
         {images.map((img: any, index) => (
           <Image
             alt={img.image}
-            className="h-50 md:max-lg:h-80 lg:max-xl:h-100 xl:h-180 object-cover w-full rounded-xs"
+            className="h-50 md:h-116 md:rounded-sm lg:h-125 xl:h-180 object-cover w-full rounded-xs"
             height={300}
             width={400}
             src={img.image}
@@ -72,7 +73,7 @@ export function ShopYourLuggage() {
         ))}
       </div>
       <div className="flex w-full justify-center items-center">
-        <button className="md:w-1/4 w-full md:mt-10 mt-4 font-sans font-normal text-white text-base bg-[#304B39] p-4 rounded-sm">Shop All</button>
+        <button className="md:w-[30%] md:text-[13px] md:font-thin md:mt-8 lg:mt-9 lg:p-4 md:p-3.5 w-full mt-4 font-sans font-normal text-white text-base bg-[#304B39] p-4 rounded-sm">Shop All</button>
       </div>
     </div>
   );

@@ -14,42 +14,45 @@ import { PropsWithChildren } from "react";
 
 
 const Section = ({ children }: PropsWithChildren) => {
-  return <div className="px-[40px]">{children}</div>;
+  return <div className="2xl:px-10 xl:px-8 lg:px-8 md:px-6">{children}</div>;
 };
 
 export default async function Home() {
   const slides = await fetchPublicData("hero")
   return (
-    <div className="min-h-screen bg-white w-full flex flex-col relative gap-[40px]">
+    <>
       <Header />
-      <Section>
-        <HeroCarousel slides={slides} />
-      </Section>
+      <div className="lg:mt-6 md:mt-4 lg:mb-8 md:mb-7">
+        <Section>
+          <HeroCarousel slides={slides} />
+        </Section>
+      </div>
+      <div className="min-h-screen bg-white w-full flex flex-col relative lg:gap-8 md:gap-10">
+        <Section>
+          <Featured />
+        </Section>
 
-      <Section>
-        <Featured />
-      </Section>
+        <Section>
+          <ShopYourLuggage />
+        </Section>
 
-      <Section>
-        <ShopYourLuggage />
-      </Section>
+        <Section>
+          <Testimonial />
+        </Section>
+        <Section>
+          <SupportSection />
+        </Section>
 
-      <Section>
-        <Testimonial />
-      </Section>
-      <Section>
-        <SupportSection />
-      </Section>
-      <Section>
         <TestimonialSection />
-      </Section>
-      <Section>
-        <FAQ />
-      </Section>
-      <Section>
-        <HelpSection />
-      </Section>
-      <Footer />
-    </div>
+
+        <Section>
+          <FAQ />
+        </Section>
+        <Section>
+          <HelpSection />
+        </Section>
+        <Footer />
+      </div>
+    </>
   );
 }
