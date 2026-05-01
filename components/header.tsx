@@ -19,7 +19,7 @@ const Button = ({
 }: PropsWithChildren<{ isActive?: boolean; onClick: () => void }>) => {
   return (
     <button
-      className={`text-base md:text-sm text-gray-600 text-center leading-snug hover:font-semibold tracking-tight ${isActive ? "font-normal" : "font-normal"
+      className={`text-base xl:text-xl md:text-sm text-gray-600 text-center leading-snug hover:font-semibold tracking-tight ${isActive ? "font-normal" : "font-normal"
         }`}
       onClick={onClick}
     >
@@ -185,14 +185,14 @@ export default function Header() {
         </div>
       </div>
       <div className="hidden md:flex flex-col w-full">
-        <div className="w-full p-1.5 flex justify-center items-center bg-[#3D4637]">
-          <p className="font-medium text-base md:text-sm md:font-normal text-white">
+        <div className="w-full p-1.5 xl:p-2 flex justify-center items-center bg-[#3D4637]">
+          <p className="font-medium xl:text-xl text-base md:text-sm md:font-normal text-white">
             Durable. Stylish. Travel-Ready.
           </p>
         </div>
         <div className="">
-          <div className="w-full bg-white grid grid-cols-3 px-8 lg:py-5 md:py-4.5 shadow-xl">
-            <div className="flex gap-6">
+          <div className="w-full bg-white grid grid-cols-3 xl:px-12 xl:py-7.5 px-8 lg:py-5 md:py-4.5 shadow-xl">
+            <div className="flex md:gap-6 xl:gap-10">
               <Button
                 isActive={true}
                 onClick={() => {
@@ -225,7 +225,7 @@ export default function Header() {
             </div>
 
             <div className="self-center justify-center object-contain flex items-center">
-              <img src="/logo.svg" className="h-8 md:h-7" />
+              <img src="/logo.svg" className="h-8 md:h-7 xl:h-10" />
             </div>
 
             <div className="flex items-center gap-3 justify-end">

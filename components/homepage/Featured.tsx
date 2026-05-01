@@ -16,16 +16,16 @@ const ImageCard = ({
         w-full
         md:w-40
         lg:w-42
-        xl:w-50.5
+        xl:w-60
       "
     >
       <div
         className="
-          relative overflow-hidden rounded
+          relative overflow-hidden rounded-md
           h-60
           md:h-35
           lg:h-38 
-          xl:h-51.5
+          xl:h-50
         "
       >
         <Image
@@ -46,10 +46,10 @@ const ImageCard = ({
             WebkitBackdropFilter: "blur(12px)",
           }}
         />
-        <div className="absolute inset-x-0 bottom-0 h-[80%] bg-linear-to-t from-black/70 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-[80%] bg-linear-to-t from-gray/10 to-transparent pointer-events-none" />
         <h3
           className="
-            absolute bottom-4 left-4 md:left-3 md:bottom-3 z-10 w-[80%]
+            absolute bottom-4 left-4 md:left-3 md:bottom-3 xl:left-5 xl:bottom-4 z-10 w-[80%]
             font-semibold text-white font-sohne-halbfett antialiased leading-tight
             text-sm
             md:text-base
@@ -67,7 +67,8 @@ const ImageCard = ({
           md:leading-3.5
           md:mt-1.5
           text-[10px]
-          xl:text-[16px]
+          xl:text-[14px]
+          xl:leading-5
         "
       >
         {caption}
@@ -104,18 +105,18 @@ export function Featured() {
     },
   ];
   return (
-    <div className="bg-[#25282A] md:rounded-2xl xl:py-25 lg:py-18 lg:px-9 md:px-8 md:py-16 xl:px-10 flex w-full md:flex-row flex-col justify-between items-center gap-0">
-      <div className="flex flex-col gap-3 md:mr-20 lg:pr-0 md:w-[35%] lg:w-[37%]">
-        <h4 className="text-xl [hyphens:none] md:text-[29px] lg:text-3xl xl:text-[44px] text-[#DB6B30] font-semibold font-sohne-dreivierfett uppercase xl:leading-14 md:leading-8">
+    <div className="bg-[#25282A] md:rounded-2xl xl:rounded-3xl xl:py-25 lg:py-18 lg:px-9 md:px-8 md:py-16 xl:px-12 flex w-full md:flex-row flex-col justify-between items-center gap-0">
+      <div className="flex flex-col gap-3 md:mr-20 lg:pr-0 md:w-[35%] xl:w-[34%] lg:w-[37%]">
+        <h4 className="text-xl [hyphens:none] md:text-[29px] lg:text-3xl xl:text-[44px] xl:leading-12 text-[#DB6B30] font-semibold font-sohne-dreivierfett uppercase md:leading-8">
           Engineered for real&#8209;world travel.
         </h4>
-        <p className="text-md md:font-thin md:leading-5 xl:text-[24px] lg:text-lg font-sans text-[#D9D9D6]">
+        <p className="text-md md:font-thin md:leading-5 xl:text-[24px] xl:leading-8 lg:text-lg font-sans text-[#D9D9D6]">
           Every Movato component is stress-tested to perform
           in high-friction environments  —from cobblestone
           streets to airport cargo holds.
         </p>
       </div>
-      <div className="col-span-2 grid md:grid-cols-4 md:mt-0 mt-4 gap-2 text-white">
+      <div className="col-span-2 grid md:grid-cols-4 md:mt-0 mt-4 gap-2 xl:gap-4 text-white">
         {features.map((f, index) => (
           <ImageCard key={`feature-${index}`} {...f} />
         ))}

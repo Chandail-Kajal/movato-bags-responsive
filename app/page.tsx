@@ -14,7 +14,7 @@ import { PropsWithChildren } from "react";
 
 
 const Section = ({ children }: PropsWithChildren) => {
-  return <div className="2xl:px-10 xl:px-8 lg:px-8 md:px-6">{children}</div>;
+  return <div className="2xl:px-10 xl:px-10 lg:px-8 md:px-6">{children}</div>;
 };
 
 export default async function Home() {
@@ -22,12 +22,12 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <div className="lg:mt-6 md:mt-4 lg:mb-8 md:mb-7">
+      <div className="lg:mt-6 md:mt-4 lg:mb-8 xl:mb-10 md:mb-7">
         <Section>
           <HeroCarousel slides={slides} />
         </Section>
       </div>
-      <div className="min-h-screen bg-white w-full flex flex-col relative lg:gap-8 md:gap-10">
+      <div className="min-h-screen bg-white w-full flex flex-col relative lg:gap-8 xl:gap-10 md:gap-10">
         <Section>
           <Featured />
         </Section>
