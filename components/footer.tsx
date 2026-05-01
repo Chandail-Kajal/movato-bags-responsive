@@ -185,27 +185,27 @@ export default function Footer() {
                     </div>
 
 
-                    <div className="font-sans leading-normal">
-                        <h3 className="text-[#B9D531] font-semibold text-md font-sohne-dreivierfett leading-tight">
+                    <div className="font-sans leading-normal lg:mt-10 lg:gap-8">
+                        <h3 className="text-[#B9D531] font-semibold text-md font-sohne-dreivierfett leading-tight ">
                             CUSTOMER SUPPORT
                         </h3>
-                        <p className="text-xs text-gray-300 mt-2">
+                        <p className="text-xs text-gray-300 mt-2 lg:mt-4">
                             Call/WhatsApp: +91 99999 99999
                         </p>
-                        <p className="text-xs text-gray-300 ">
+                        <p className="text-xs text-gray-300 lg:mt-4">
                             Email: support@movatobags.com
                         </p>
-                        <p className="text-xs text-gray-300 ">
+                        <p className="text-xs text-gray-300 lg:mt-4">
                             Monday - Saturday / 10 AM - 7 PM
                         </p>
                     </div>
 
 
                     <div className="font-sans">
-                        <h3 className="text-[#B9D531] font-semibold md:text-md font-sohne-dreivierfett">
+                        <h3 className="text-[#B9D531] font-semibold md:text-md font-sohne-dreivierfett lg:mt-10 ">
                             STAY UPDATED
                         </h3>
-                        <div className="flex mt-2 bg-white">
+                        <div className="flex mt-2 bg-white lg:mt-4">
                             <input
                                 type="email"
                                 placeholder="Enter your email"
@@ -213,9 +213,9 @@ export default function Footer() {
                             />
                             <button className="bg-[#2F392D] px-4">→</button>
                         </div>
-                        <p className="mt-6 text-xs text-gray-300">
+                        <p className="mt-6 text-xs text-white">
                             Product launches, performance insights, and travel stories —
-                            straight from the Movato team. No spam. No noise.
+                            straight from the Movato team. No spam. No noise.Just things worth knowing.
                         </p>
                     </div>
                 </div>

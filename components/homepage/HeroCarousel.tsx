@@ -45,20 +45,20 @@ export function HeroCarousel({ slides }: Props) {
               alt="slide"
               width={1920}
               height={1280}
-              className="w-full h-72 md:h-132 lg:h-142 object-cover"
+              className="w-full h-72 md:h-132 lg:h-142 object-cover xl:h-200"
             />
 
-            <div className="md:absolute md:inset-0 flex items-end md:ml-10 lg:mb-9 md:mb-6">
-              <div className="md:w-[36%] w-full text-[#3D4637] flex flex-col">
+            <div className="md:absolute md:inset-0 flex items-end md:ml-10 lg:mb-18 md:mb-6">
+              <div className="md:w-[36%] w-full text-[#3D4637] flex flex-col  ">
                 <h1 className="font-black font-sohne-extrafett uppercase xl:text-[110px] xl:leading-24 lg:text-[76px] lg:leading-17 md:text-7xl md:leading-16 text-3xl ">
                   {slide.title}
                 </h1>
 
-                <p className="text-base w-full xl:text-[24px] lg:text-[16px] md:text-md md:leading-5.5 md:mt-2 font-sans font-medium leading-3  text-[#28381d]">
+                <p className="text-base w-full xl:text-[22px] lg:text-[16px] md:text-md md:leading-5.5 md:mt-2 font-sans font-medium leading-5   text-[#304B39] xl:mt-8">
                   {slide.description}
                 </p>
 
-                <div className="flex flex-col md:mt-8 lg:mt-6 xl:text-[20px] lg:text-sm md:text-xs xl:gap-6 lg:gap-4 md:gap-3">
+                <div className="flex flex-col md:mt-8 lg:mt-6 xl:text-[20px] lg:text-sm md:text-xs xl:gap-4 lg:gap-4 md:gap-3">
                   {slide.primaryBtn && (
                     <button className="bg-[#2F4A36] text-white xl:py-5 lg:py-4 md:py-4 md:rounded-xs py-3 rounded-md">
                       {slide.primaryBtn}
@@ -66,7 +66,7 @@ export function HeroCarousel({ slides }: Props) {
                   )}
 
                   {slide.secondaryBtn && (
-                    <button className="bg-white/70 backdrop-blur px-6 xl:py-5 lg:py-4 md:py-4 md:rounded-xs py-3 border md:border-green-800 rounded-md ">
+                    <button className="bg-white/70 backdrop-blur px-6 xl:py-5 lg:py-4 md:py-4 md:rounded-xs py-3 border md:border-green-800 rounded-md">
                       {slide.secondaryBtn}
                     </button>
                   )}
