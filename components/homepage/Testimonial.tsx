@@ -15,7 +15,7 @@ const Card = ({
         <Image src="/assets/cardbg.svg" alt="bg" height={400} width={600} className="object-cover h-full" />
       </div>
       <div className="absolute inset-0 bg-black/85">
-        <div className="h-full w-full flex flex-col items-center justify-between xl:px-14 xl:py-6 lg:px-10 lg:py-5 md:px-8 md:py-4 gap-0">
+        <div className="h-full w-full flex flex-col items-center gap-between xl:px-14 xl:py-6 lg:px-10 lg:py-5 md:px-8 md:py-4 gap-0">
           <div>
             <h5 className="text-[#DB6B30] xl:text-[48px] md:text-3xl md:leading-5 xl:leading-10 font-sans font-bold">
               {mainText}

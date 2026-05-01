@@ -234,9 +234,9 @@ export default function Header() {
                 <input
                   type="text"
                   placeholder="Search"
-                  className="text-gray-700 w-full md:text-sm placeholder:text-gray-400 bg-transparent outline-none"
+                  className="text-[#3D4637] w-full md:text-sm placeholder:text-gray-400 bg-transparent outline-none"
                 />
-                <Mic className="text-gray-500 md:size-5" />
+                <Mic className="text-[#3D4637] md:size-5 fill-[#3D4637] " />
               </div>
 
               <div className="w-9 h-9 md:h-7 md:w-7 lg:h-8 lg:w-8 bg-[#F0F0E6] rounded-full flex items-center justify-center">
