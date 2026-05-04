@@ -4,8 +4,7 @@
 import {
   ArrowLeft,
   MenuIcon,
-  Mic,
-  Search,
+
   X,
 } from "lucide-react";
 import { PropsWithChildren, useState } from "react";
@@ -157,7 +156,7 @@ export default function Header() {
             <input
               autoFocus
               placeholder="Search..."
-              className="w-full border-b border-r-gray-300 outline-none py-2"
+              className="w-full border-b border-r-gray-300 outline-none py-2  "
             />
           </div>
         </div>
@@ -174,7 +173,7 @@ export default function Header() {
             className="p-1.5 rounded-full bg-gray-200"
             onClick={() => setSearchOpen(true)}
           >
-            <Search className="w-5 h-5" />
+            
           </button>
           <button className="p-1.5 rounded-full bg-gray-200">
             <img src="/assets/icons/Vector.svg" className="w-5 h-5" />
@@ -229,24 +228,24 @@ export default function Header() {
             </div>
 
             <div className="flex items-center gap-3 justify-end">
-              <div className="flex items-center bg-[#F0F0E6] px-2.5 md:h-7 lg:h-8 w-45 md:w-35 border border-gray-300 rounded-full gap-2">
-                <Search className="text-gray-500 md:size-5"  />
+              <div className="flex items-center justify-center bg-[#F0F0E6] px-2.5 md:h-7 lg:h-10 lg:w-50  w-45 md:w-35 border border-gray-300 rounded-full gap-2">
+                <img className="text-gray-500 md:size-5" src="/assets/icons/search.svg"  />
                 <input
                   type="text"
                   placeholder="Search"
-                  className="text-[#3D4637] w-full md:text-sm placeholder:text-gray-400 bg-transparent outline-none"
+                  className="text-[#3D4637] w-full md:text-sm placeholder:text-[#3D4637] bg-transparent outline-none placeholder:text-[16px]"
                 />
-                <Mic className="text-[#3D4637] md:size-5 fill-[#3D4637] " />
+                <img className="text-[#3D4637] md:size-5 fill-[#3D4637] " src="/assets/icons/mic.svg" />
               </div>
 
-              <div className="w-9 h-9 md:h-7 md:w-7 lg:h-8 lg:w-8 bg-[#F0F0E6] rounded-full flex items-center justify-center">
-                <img src="/assets/icons/Vector.svg" className="size-5 md:size-4" />
+              <div className="w-9 h-9 md:h-7 md:w-7 lg:h-12 lg:w-12 bg-[#F0F0E6] rounded-full flex items-center justify-center border-gray-300">
+                <img src="/assets/icons/Vector.svg" className="size-5 md:size-4 lg:size-6" />
               </div>
-              <div className="w-9 h-9 md:h-7 md:w-7 lg:h-8 lg:w-8 bg-[#F0F0E6] flex items-center justify-center rounded-full">
-                <img src="/assets/icons/cart.svg" className="size-5 md:size-4" />
+              <div className="w-9 h-9 md:h-7 md:w-7 lg:h-12 lg:w-12 bg-[#F0F0E6] flex items-center justify-center rounded-full border-gray-300">
+                <img src="/assets/icons/cart.svg" className="size-5 md:size-4 lg:size-6" />
               </div>
-              <div className="w-9 h-9 md:h-7 md:w-7 lg:h-8 lg:w-8 bg-[#F0F0E6] flex items-center justify-center rounded-full">
-                <img src="assets/icons/person.svg" className="size-5 md:size-4" />
+              <div className="w-9 h-9 md:h-7 md:w-7 lg:h-12 lg:w-12 bg-[#F0F0E6] flex items-center justify-center rounded-full border-gray-300">
+                <img src="assets/icons/person.svg" className="size-5 md:size-4 lg:size-6" />
               </div>
             </div>
           </div>

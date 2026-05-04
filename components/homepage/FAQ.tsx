@@ -71,20 +71,20 @@ export default function FAQ() {
   };
 
   return (
-    <div className="w-full md:max-w-5xl lg:px-2 lg:py-20 mx-auto px-6 py-16">
-      <h2 className="text-3xl md:text-[26px] lg:text-[28px] font-sohne-halbfett font-semibold text-center text-[#3D4637] mb-12">
+    <div className="w-full md:max-w-372.5 lg:py-20 mx-auto px-6 py-16">
+      <h2 className="text-3xl md:text-[26px] lg:text-[38px] font-sohne-halbfett font-semibold text-center text-[#3D4637] mb-12 tracking-wider leading-normal">
         Frequently Asked Questions
       </h2>
-      <div className="space-y-6">
+      <div className="space-y-8 ">
         {faqData.map((item, index) => {
           const isOpen = openIndex === index;
           return (
-            <div key={index} className="border-b font-sans border-gray-200 pb-4">
+            <div key={index} className="border-b font-sans border-gray-200 pb-4 ">
               <div
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggleFAQ(index)}
               >
-                <h3 className="text-lg md:text-base lg:text-[17px] font-semibold text-black">
+                <h3 className="text-lg md:text-base lg:text-[25px] font-semibold text-black leading-wide">
                   {item.question}
                 </h3>
                 <div className="w-8 h-8 flex items-center justify-center rounded-xl shadow-xs border border-gray-100">
@@ -95,7 +95,7 @@ export default function FAQ() {
                 className={`transition-all duration-300 overflow-hidden ${isOpen ? "max-h-40 mt-3" : "max-h-0"
                   }`}
               >
-                <p className="text-black text-[17px] md:text-base lg:text-[17px] leading-tight tracking-wide font-sans">
+                <p className="text-black text-[17px] md:text-base lg:text-[26px] leading-tight font-sans">
                   {item.answer}
                 </p>
               </div>

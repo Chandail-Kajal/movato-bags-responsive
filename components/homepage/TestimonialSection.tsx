@@ -1,8 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import React, { useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 type Testimonial = {
   rating: number;
@@ -16,11 +19,11 @@ function StarRating({ rating }: { rating: number }) {
     <div className="flex gap-1">
       {[1, 2, 3, 4, 5].map((star) => {
         if (rating >= star) {
-          return <FaStar key={star} className="text-[#3D4637] md:size-4" size={22} />;
+          return <img key={star} className="text-[#3D4637] md:size-4 lg:size-6"  src={"/assets/icons/Star.svg"}  />;
         } else if (rating >= star - 0.5) {
-          return <FaStarHalfAlt key={star} className="text-[#3D4637] md:size-4" size={22} />;
+          return <img key={star} className="text-[#3D4637] md:size-4 lg:size-6" sizes="45px" src={"/assets/icons/halfstar.svg"} />;
         } else {
-          return <FaRegStar key={star} className="text-[#3D4637] md:size-4" size={22} />;
+          return <img key={star} className="text-[#3D4637] md:size-4 lg:size-6" sizes="45px" src={"/assets/icons/halfstar.svg"} />;
         }
       })}
     </div>
