@@ -71,20 +71,20 @@ export default function FAQ() {
   };
 
   return (
-    <div className="w-full md:max-w-372.5 lg:py-20 mx-auto px-6 py-16">
-      <h2 className="text-3xl md:text-[26px] lg:text-[38px] font-sohne-halbfett font-semibold text-center text-[#3D4637] mb-12 tracking-wider leading-normal">
+    <div className="w-full xl:px-41 lg:px-30 md:px-28 lg:py-20 mx-auto px-6 py-16">
+      <h2 className="text-3xl md:text-[28px] lg:text-[30px] xl:text-[38px] font-sohne-halbfett font-semibold text-center text-[#3D4637] mb-12 xl:mb-16 tracking-tight leading-normal">
         Frequently Asked Questions
       </h2>
-      <div className="space-y-8 ">
+      <div className="flex flex-col gap-2 lg:gap-4 md:gap-3">
         {faqData.map((item, index) => {
           const isOpen = openIndex === index;
           return (
-            <div key={index} className="border-b font-sans border-gray-200 pb-4 ">
+            <div key={index} className="border-b font-sans border-gray-200 xl:pb-6 lg:pb-4 md:pb-4">
               <div
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggleFAQ(index)}
               >
-                <h3 className="text-lg md:text-base lg:text-[25px] font-semibold text-black leading-wide">
+                <h3 className="text-lg md:text-base lg:text-lg font-semibold xl:font-medium text-black ">
                   {item.question}
                 </h3>
                 <div className="w-8 h-8 flex items-center justify-center rounded-xl shadow-xs border border-gray-100">
@@ -92,10 +92,10 @@ export default function FAQ() {
                 </div>
               </div>
               <div
-                className={`transition-all duration-300 overflow-hidden ${isOpen ? "max-h-40 mt-3" : "max-h-0"
+                className={`transition-all duration-300 overflow-hidden lg:mt-2 md:mt-2 w-[90%] ${isOpen ? "max-h-40 mt-3" : "max-h-0"
                   }`}
               >
-                <p className="text-black text-[17px] md:text-base lg:text-[26px] leading-tight font-sans">
+                <p className="text-black lg:text-lg md:text-base xl:text-2xl xl:leading-snug leading-tight font-sans">
                   {item.answer}
                 </p>
               </div>
