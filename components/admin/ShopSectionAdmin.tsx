@@ -1,12 +1,11 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { api } from "@/lib/api";
 
-// shadcn
 import {
   Dialog,
   DialogContent,
@@ -18,11 +17,27 @@ import { Button } from "@/components/ui/button";
 import { ShopSecitonForm } from "@/components/forms/ShopSectionForm";
 import Image from "next/image";
 
+type CategoryType = {
+  _id: string;
+  name: string;
+};
+
+type Category = {
+  _id: string;
+  name: string;
+};
+
 type ItemType = {
   _id: string;
   image: string;
   isActive: boolean;
   order: number;
+
+  categoryType: CategoryType;
+  categories: Category[];
+
+  buttonTitle?: string;
+  caption?: string;
 };
 
 export function ShopSectionAdmin() {
@@ -30,7 +45,6 @@ export function ShopSectionAdmin() {
   const [original, setOriginal] = useState<ItemType[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [editItem, setEditItem] = useState<ItemType | null>(null);
-  const [image, setImage] = useState<File | string>("");
 
   const fetchItems = async () => {
     const { data } = await api.get("/admin/sections/shop");
@@ -68,44 +82,40 @@ export function ShopSectionAdmin() {
   };
 
   const toggleActive = async (item: ItemType) => {
+    setItems((prev) =>
+      prev.map((i) =>
+        i._id === item._id ? { ...i, isActive: !i.isActive } : i
+      )
+    );
+
     await api.patch("/admin/sections/shop", {
       id: item._id,
       isActive: !item.isActive,
     });
-
-    fetchItems();
   };
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete item?")) return;
 
     await api.delete(`/admin/sections/shop?id=${id}`);
-    fetchItems();
+
+    setItems((prev) => prev.filter((i) => i._id !== id));
   };
 
   const openAdd = () => {
     setEditItem(null);
-    setImage("");
     setShowModal(true);
   };
 
   const openEdit = (item: ItemType) => {
     setEditItem(item);
-    setImage(item.image);
     setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setEditItem(null);
-    setImage("");
   };
 
   return (
     <div className="p-6 w-full min-h-screen bg-white">
-
       <div className="flex justify-between mb-6">
-        <h1 className="text-2xl font-bold">Swap Image Admin</h1>
+        <h1 className="text-2xl font-bold">Shop Sections</h1>
 
         <div className="flex gap-2">
           {isChanged && (
@@ -128,30 +138,58 @@ export function ShopSectionAdmin() {
                     <div
                       ref={provided.innerRef}
                       {...provided.draggableProps}
-                      className="flex items-center gap-4 p-3 mb-3 shadow rounded"
+                      className="flex items-center gap-4 p-4 mb-3 shadow rounded"
                     >
                       <div {...provided.dragHandleProps}>☰</div>
 
                       <Image
-                        height={50}
-                        width={50}
-                        alt={item.image}
+                        height={80}
+                        width={120}
+                        alt=""
                         src={item.image}
                         className="w-32 h-20 object-cover rounded"
                       />
 
+                      {/* INFO */}
+                      <div className="flex flex-col gap-1">
+                        <span className="font-semibold">
+                          {item.categoryType?.name}
+                        </span>
+
+                        <div className="flex gap-1 flex-wrap">
+                          {item.categories?.map((cat) => (
+                            <span
+                              key={cat._id}
+                              className="text-xs bg-gray-200 px-2 py-1 rounded"
+                            >
+                              {cat.name}
+                            </span>
+                          ))}
+                        </div>
+
+                        {item.caption && (
+                          <span className="text-sm text-gray-500">
+                            {item.caption}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* ACTIVE TOGGLE */}
                       <div
                         onClick={() => toggleActive(item)}
-                        className={`ml-auto w-10 h-5 flex items-center p-1 rounded-full cursor-pointer ${item.isActive ? "bg-green-500" : "bg-gray-300"
-                          }`}
+                        className={`ml-auto w-10 h-5 flex items-center p-1 rounded-full cursor-pointer ${
+                          item.isActive ? "bg-green-500" : "bg-gray-300"
+                        }`}
                       >
                         <div
-                          className={`bg-white w-4 h-4 rounded-full ${item.isActive ? "translate-x-5" : ""
-                            }`}
+                          className={`bg-white w-4 h-4 rounded-full ${
+                            item.isActive ? "translate-x-5" : ""
+                          }`}
                         />
                       </div>
 
                       <Button onClick={() => openEdit(item)}>Edit</Button>
+
                       <Button
                         variant="destructive"
                         onClick={() => handleDelete(item._id)}
@@ -172,13 +210,13 @@ export function ShopSectionAdmin() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {editItem ? "Edit Image" : "Add Image"}
+              {editItem ? "Edit Section" : "Add Section"}
             </DialogTitle>
           </DialogHeader>
 
           <ShopSecitonForm
             editItem={editItem}
-            onClose={closeModal}
+            onClose={() => setShowModal(false)}
             refresh={fetchItems}
             items={items}
           />

@@ -2,32 +2,28 @@ import mongoose from "mongoose";
 
 const shopSectionSchema = new mongoose.Schema(
   {
-    image: {
-      type: String,
-      required: true,
-    },
+    image: { type: String, required: true },
 
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
+    isActive: { type: Boolean, default: true },
 
-    order: {
-      type: Number,
-      default: 0,
-    },
+    order: { type: Number, default: 0 },
 
     categoryType: {
-      type: String,
-      enum: ["size", "collection", "trip"],
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CategoryType",
       required: true,
     },
+
+    categories: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+      },
+    ],
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 export const ShopSectionModel =
-  mongoose.models.ShopSectionModel ||
-  mongoose.model("ShopSectionModel", shopSectionSchema);
+  mongoose.models.ShopSection ||
+  mongoose.model("ShopSection", shopSectionSchema);

@@ -1,7 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useFormik } from "formik";
+import { useEffect, useState } from "react";
 import { api } from "@/lib/api";
 
 import { Button } from "@/components/ui/button";
@@ -10,148 +13,198 @@ import * as Yup from "yup";
 import Image from "next/image";
 
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 
 const schema = Yup.object({
-    image: Yup.mixed().required("Image is required"),
-    categoryType: Yup.string()
-        .oneOf(["size", "collection", "trip"])
-        .required("Category type is required"),
-    
+  categoryType: Yup.string().required("Category type is required"),
+  categories: Yup.array().min(1, "Select at least one category"),
 });
 
 export const ShopSecitonForm = ({
-    editItem,
-    onClose,
-    refresh,
-    items,
+  editItem,
+  onClose,
+  refresh,
+  items,
 }: any) => {
-    const formik = useFormik({
-        initialValues: {
-            image: editItem?.image || "",
-            categoryType: editItem?.categoryType || "",
-            buttonTitle: editItem?.buttonTitle || "",
-            caption: editItem?.caption || "",
-        },
-        enableReinitialize: true,
-        validationSchema: schema,
-        onSubmit: async (values) => {
-            const formData = new FormData();
+  const [types, setTypes] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
 
-            if (values.image instanceof File) {
-                formData.append("image", values.image);
-            }
+  // 🔥 Fetch category types
+  const fetchTypes = async () => {
+    const res = await api.get("/admin/category-types");
+    setTypes(res.data.data || []);
+  };
 
-            formData.append("categoryType", values.categoryType);
-            formData.append("buttonTitle", values.buttonTitle);
-            formData.append("caption", values.caption);
+  // 🔥 Fetch categories by type
+  const fetchCategories = async (typeId: string) => {
+    const res = await api.get(`/admin/categories?type=${typeId}`);
+    setCategories(res.data.data || []);
+  };
 
-            try {
-                if (editItem) {
-                    formData.append("id", editItem._id);
-                    await api.put("/admin/sections/shop", formData);
-                } else {
-                    formData.append("order", String(items.length));
-                    await api.post("/admin/sections/shop", formData);
-                }
+  useEffect(() => {
+    fetchTypes();
+  }, []);
 
-                refresh();
-                onClose();
-            } catch (err) {
-                console.error(err);
-            }
-        },
-    });
+  const formik = useFormik({
+    initialValues: {
+      image: editItem?.image || "",
+      categoryType: editItem?.categoryType?._id || "",
+      categories: editItem?.categories?.map((c: any) => c._id) || [],
+      buttonTitle: editItem?.buttonTitle || "",
+      caption: editItem?.caption || "",
+    },
+    enableReinitialize: true,
+    validationSchema: schema,
+    onSubmit: async (values) => {
+      const formData = new FormData();
 
-    return (
-        <form onSubmit={formik.handleSubmit} className="space-y-4">
+      if (values.image instanceof File) {
+        formData.append("image", values.image);
+      }
 
-            {typeof formik.values.image === "string" &&
-                formik.values.image && (
-                    <Image
-                        height={50}
-                        width={50}
-                        alt="preview"
-                        src={formik.values.image}
-                        className="w-full h-32 object-cover rounded"
-                    />
-                )}
+      formData.append("categoryType", values.categoryType);
 
-            <Input
-                type="file"
-                onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                        formik.setFieldValue("image", file);
-                    }
-                }}
-            />
+      values.categories.forEach((catId: string) => {
+        formData.append("categories", catId);
+      });
 
-           
-            <Select
-                value={formik.values.categoryType}
-                onValueChange={(value) =>
-                    formik.setFieldValue("categoryType", value)
-                }
-            >
-                <SelectTrigger>
-                    <SelectValue placeholder="Select category type" />
-                </SelectTrigger>
+      formData.append("buttonTitle", values.buttonTitle);
+      formData.append("caption", values.caption);
 
-                <SelectContent>
-                    <SelectItem value="size">Size</SelectItem>
-                    <SelectItem value="collection">Collection</SelectItem>
-                    <SelectItem value="trip">Trip</SelectItem>
-                </SelectContent>
-            </Select>
+      try {
+        if (editItem) {
+          formData.append("id", editItem._id);
+          await api.put("/admin/sections/shop", formData);
+        } else {
+          formData.append("order", String(items.length));
+          await api.post("/admin/sections/shop", formData);
+        }
 
-            {formik.touched.categoryType && formik.errors.categoryType && (
-                <p className="text-red-500 text-sm">
-                    {formik.errors.categoryType as string}
-                </p>
-            )}
+        refresh();
+        onClose();
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  });
 
-           
-            <Input
-                placeholder="Button Title"
-                {...formik.getFieldProps("buttonTitle")}
-            />
-            {formik.touched.buttonTitle && formik.errors.buttonTitle && (
-                <p className="text-red-500 text-sm">
-                    {formik.errors.buttonTitle as string}
-                </p>
-            )}
+  // 🔁 Load categories when type changes
+  useEffect(() => {
+    if (formik.values.categoryType) {
+      fetchCategories(formik.values.categoryType);
+    }
+  }, [formik.values.categoryType]);
 
-           
-            <Input
-                placeholder="Caption"
-                {...formik.getFieldProps("caption")}
-            />
-            {formik.touched.caption && formik.errors.caption && (
-                <p className="text-red-500 text-sm">
-                    {formik.errors.caption as string}
-                </p>
-            )}
+  const toggleCategory = (id: string) => {
+    const selected = formik.values.categories;
 
-            
-            {formik.touched.image && formik.errors.image && (
-                <p className="text-red-500 text-sm">
-                    {formik.errors.image as string}
-                </p>
-            )}
+    if (selected.includes(id)) {
+      formik.setFieldValue(
+        "categories",
+        selected.filter((c: string) => c !== id)
+      );
+    } else {
+      formik.setFieldValue("categories", [...selected, id]);
+    }
+  };
 
-           
-            <div className="flex justify-end gap-2">
-                <Button type="button" variant="ghost" onClick={onClose}>
-                    Cancel
-                </Button>
-                <Button type="submit">Save</Button>
-            </div>
-        </form>
-    );
+  return (
+    <form onSubmit={formik.handleSubmit} className="space-y-4">
+
+      {/* IMAGE PREVIEW */}
+      {typeof formik.values.image === "string" &&
+        formik.values.image && (
+          <Image
+            height={100}
+            width={200}
+            alt="preview"
+            src={formik.values.image}
+            className="w-full h-32 object-cover rounded"
+          />
+        )}
+
+      <Input
+        type="file"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) formik.setFieldValue("image", file);
+        }}
+      />
+
+      {/* CATEGORY TYPE */}
+      <Select
+        value={formik.values.categoryType}
+        onValueChange={(value) =>
+          formik.setFieldValue("categoryType", value)
+        }
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Select category type" />
+        </SelectTrigger>
+
+        <SelectContent>
+          {types.map((type) => (
+            <SelectItem key={type._id} value={type._id}>
+              {type.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      {/* CATEGORIES MULTI SELECT */}
+      {categories.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {categories.map((cat) => {
+            const selected = formik.values.categories.includes(cat._id);
+
+            return (
+              <button
+                type="button"
+                key={cat._id}
+                onClick={() => toggleCategory(cat._id)}
+                className={`px-3 py-1 rounded border ${
+                  selected
+                    ? "bg-black text-white"
+                    : "bg-gray-100"
+                }`}
+              >
+                {cat.name}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
+      {formik.errors.categories && (
+        <p className="text-red-500 text-sm">
+          {formik.errors.categories as string}
+        </p>
+      )}
+
+      {/* BUTTON TITLE */}
+      <Input
+        placeholder="Button Title"
+        {...formik.getFieldProps("buttonTitle")}
+      />
+
+      {/* CAPTION */}
+      <Input
+        placeholder="Caption"
+        {...formik.getFieldProps("caption")}
+      />
+
+      {/* ACTIONS */}
+      <div className="flex justify-end gap-2">
+        <Button type="button" variant="ghost" onClick={onClose}>
+          Cancel
+        </Button>
+        <Button type="submit">Save</Button>
+      </div>
+    </form>
+  );
 };

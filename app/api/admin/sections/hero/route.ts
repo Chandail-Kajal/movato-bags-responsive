@@ -1,45 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const runtime = "nodejs";
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
+export const runtime = "nodejs";
 
 import { connectDb } from "@/lib/db";
 import { HeroSectionModel } from "@/models";
 import fs from "fs";
-import multer from "multer";
 import { NextRequest, NextResponse } from "next/server";
-import path from "path";
 
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadPath = "./public/uploads";
-
-        if (!fs.existsSync(uploadPath)) {
-            fs.mkdirSync(uploadPath, { recursive: true });
-        }
-        cb(null, uploadPath);
-    },
-    filename: (req, file, cb) => {
-        const uniqueName =
-            Date.now() + "-" + Math.round(Math.random() * 1e9) +
-            path.extname(file.originalname);
-
-        cb(null, uniqueName);
-    },
-});
-
-const upload = multer({ storage });
-
-
-function runMiddleware(req: any, res: any, fn: any) {
-    return new Promise((resolve, reject) => {
-        fn(req, res, (result: any) => {
-            if (result instanceof Error) return reject(result);
-            resolve(result);
-        });
-    });
-}
 
 export async function GET() {
     try {
@@ -162,4 +129,19 @@ export async function PATCH(req: NextRequest) {
         console.error(error);
         return NextResponse.json({ success: false }, { status: 500 });
     }
+}
+
+export async function DELETE(req: NextRequest) {
+    try {
+        const searchParams = req.nextUrl.searchParams
+        const id = searchParams.get("id")
+        const result = await HeroSectionModel.deleteOne({ _id: id })
+        if (result.deletedCount > 0) {
+            return NextResponse.json({ success: true, deleteCount: result.deletedCount }, { status: 200 })
+        }
+        return NextResponse.json({ success: false }, { status: 304 })
+    } catch (error) {
+        return NextResponse.json({ success: false }, { status: 500 })
+    }
+
 }

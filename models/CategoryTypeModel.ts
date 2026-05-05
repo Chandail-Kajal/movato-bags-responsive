@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const CategoryTypeSchema = new mongoose.Schema({
-  name: { type: String, required: true }, // e.g. Size, Usage, Collection
+  name: { type: String, required: true }, // Size, Usage, Collection
   slug: { type: String, unique: true },
 });
 
 export const CategoryTypeModel =
-  mongoose.models.CategoryTypeModel ||
-  mongoose.model("CategoryTypeModel", CategoryTypeSchema);
+  mongoose.models.CategoryType ||
+  mongoose.model("CategoryType", CategoryTypeSchema);

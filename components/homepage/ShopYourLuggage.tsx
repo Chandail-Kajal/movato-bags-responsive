@@ -12,7 +12,7 @@ const Button = ({
   return (
     <button
       onClick={onClick}
-      className={`xl:text-[20px] text-[13px] flex-1 font-sans border-2 border-[#3D4637] text-[#304B39] flex items-center justify-center text-center text-nowrap rounded-xs 
+      className={`xl:text-[20px] capitalize text-[13px] flex-1 font-sans border-2 border-[#3D4637] text-[#304B39] flex items-center justify-center text-center text-nowrap rounded-xs 
 md:px-6 md:py-1.5 md:rounded-xs
 lg:py-2 lg:rounded-sm
 xl:px-8 xl:py-3
@@ -25,13 +25,16 @@ ${isActive && "font-medium border-3"}`}>
 
 export function ShopYourLuggage() {
   const [images, setImages] = useState([])
-  const [categorytype, setCategorytype] = useState<"size" | "collection" | "trip">("size")
+  const [types, setTypes] = useState<any[]>([])
+  const [categorytype, setCategorytype] = useState<string>("size")
 
-  const categories: Array<{ category: "size" | "collection" | "trip"; label: string }> = [
-    { category: "size", label: "Shop By Size" },
-    { category: "collection", label: "Shop By Collection" },
-    { category: "trip", label: "Shop By Trip" },
-  ]
+  useEffect(() => {
+    (async () => {
+      const res = await fetchPublicData("category-types")
+      setTypes(res || [])
+    })()
+  }, [])
+
 
   useEffect(() => {
     (async () => {
@@ -56,7 +59,15 @@ export function ShopYourLuggage() {
         </p>
         <div className="md:mt-4 xl:mt-8 flex flex-row xl:gap-5 md:items-center md:gap-4 gap-1">
           {
-            categories.map((c, index) => <Button key={`button_${index}`} isActive={categorytype === c.category} onClick={() => setCategorytype(c.category)} >{c.label}</Button>)
+            types.map((t) => (
+              <Button
+                key={t._id}
+                isActive={categorytype === t.slug}
+                onClick={() => setCategorytype(t.slug)}
+              >
+                Shop By {t.name}
+              </Button>
+            ))
           }
         </div>
       </div>
