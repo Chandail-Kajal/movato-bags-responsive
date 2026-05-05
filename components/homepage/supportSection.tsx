@@ -34,35 +34,35 @@ export default function SupportSection() {
   };
 
   return (
-    <section className="md:px-0 md:pt-10 px-4 py-2">
-      <div className="flex md:flex-row items-center flex-col ">
-        <div className="md:w-1/2 flex flex-col justify-center">
-          <h1 className="xl:text-[60px] xl:leading-16 lg:max-xl:text-5xl md:text-[42px] md:leading-10 lg:leading-12 font-semibold text-3xl font-sohne-halbfett text-[#2f4635] leading-tighter whitespace-pre-wrap">
+    <section className="md:px-0 md:pt-10 py-2">
+      <div className="flex md:flex-row items-center flex-col-reverse ">
+        <div className="md:w-1/2 flex flex-col justify-center md:px-0 px-2">
+          <h1 className="xl:text-[60px] xl:leading-16 lg:max-xl:text-5xl md:text-[42px] md:leading-10 lg:leading-12 font-semibold text-3xl font-sohne-halbfett text-[#2f4635] tracking-wide leading-tighter whitespace-pre-wrap">
             {data.heading}
           </h1>
-          <p className="text-[#304B39] md:w-[80%] lg:w-[85%] md:text-md md:leading-tight md:mt-3 xl:text-[24px] lg:text-[18px]  text-base">
+          <p className="text-[#304B39] mt-2 md:w-[80%] leading-5 lg:w-[85%] md:text-md md:leading-tight md:mt-3 xl:text-[24px] lg:text-[18px] text-base">
             {data.subheading}
           </p>
-          <div className="flex md:flex-row justify-start xl:gap-10 md:gap-8 md:mt-6 lg:gap-10 lg:mt-10 mt-10 flex-col gap-4">
+          <div className="grid grid-cols-2 md:flex md:flex-row justify-start xl:gap-10 md:gap-8 md:mt-6 lg:gap-10 lg:mt-10 mt-10 flex-col gap-4">
             {data.features.map((feature, index) => (
-              <div key={index} className="flex flex-col md:w-40 xl:w-65 gap-2">
+              <div key={index} className="flex flex-col w-full md:w-40 xl:w-65 gap-2">
                 <div className="flex flex-col gap-4 xl:gap-8">
                   <Image alt={feature.title} className="xl:h-18 xl:w-18 lg:h-12 lg:w-12 md:h-10 md:w-10 h-14 w-14 text-black" src={feature.path} width={100} height={100}></Image>
-                  <h3 className="text-[#DB6B30] font-sans w-[80%] xl:leading-6 lg:text-[18px] lg:w-[70%] md:text-[16px] md:leading-4 font-semibold lg:max-xl:text-md text-sm xl:text-[24px] uppercase">
+                  <h3 className="text-[#DB6B30] font-sans w-[80%] text-xl leading-5 xl:leading-6 lg:text-[18px] md:text-[16px] md:leading-4 font-semibold lg:max-xl:text-md xl:text-[24px] uppercase">
                     {feature.title}
                   </h3>
                 </div>
-                <p className="text-[#304B39] md:text-[11px] md:leading-tight md:tracking-tighter text-xs xl:text-[16px] w-[80%] leading-relaxed">
+                <p className="text-[#304B39] md:text-[11px] md:leading-tight md:tracking-tighter text-xs xl:text-[16px] w-[80%] leading-4">
                   {feature.description}
                 </p>
               </div>
             ))}
           </div>
-          <button className="w-[35%] md:flex md:justify-center md:items-center md:text-[13px] lg:text-[14px] xl:text-xl xl:p-5 md:mt-6 lg:mt-8 py-3.5 mt-4 border border-[#3D4637] rounded-xs text-[#304B39] text-[20px] hover:bg-[#2f4635] hover:text-white transition">
+          <button className="md:w-[35%] w-full mt-6 md:flex md:justify-center md:items-center md:text-[13px] lg:text-[14px] xl:text-xl xl:p-5 md:mt-6 lg:mt-8 py-3.5 border border-[#3D4637] rounded-md text-[#304B39] text-[16px] hover:bg-[#2f4635] hover:text-white transition">
             {data.buttonText}
           </button>
         </div>
-        <div className="relative md:w-1/2 rounded-2xl md:h-screen xl:h-230 h-90 mt-4 overflow-hidden">
+        <div className="relative md:w-1/2 w-full rounded-2xl md:h-screen xl:h-230 h-100 mt-4 mb-6 overflow-hidden">
           <Image
             src={data.imageUrl}
             alt="support"

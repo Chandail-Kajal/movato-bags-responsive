@@ -16,7 +16,7 @@ export type Section = {
 
 export function FooterColumn({ title, links }: Section) {
     return (
-        <div className="flex flex-col md:gap-4 xl:gap-8">
+        <div className="flex flex-col md:gap-4 xl:gap-8 mt-4 md:mt-0">
             <h3 className="text-[#B9D531] font-semibold font-sohne-halbfett tracking-wider xl:text-2xl md:text-sm lg:text-md text-md">{title}</h3>
             <div className="flex flex-col gap-2 xl:gap-3">
                 {links.map((item, index) => {
@@ -143,7 +143,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-[#304B39] text-white md:px-16 md:pt-14 md:pb-2 xl:pt-16 xl:pb-4 px-4 py-2 relative overflow-hidden " style={{ backgroundImage: 'url("/assets/Website-Footer.png")' }}>
+        <footer className="bg-[#304B39] text-white md:px-16 md:pt-14 md:pb-2 xl:pt-16 xl:pb-4 px-4 pt-8 pb-2 relative overflow-hidden " style={{ backgroundImage: 'url("/assets/Website-Footer.png")' }}>
             <div className="absolute inset-0 opacity-20 -z-10">
                 <Image
                     src="/assets/images/header-1.jpeg"

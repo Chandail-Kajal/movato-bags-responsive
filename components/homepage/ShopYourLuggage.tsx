@@ -73,20 +73,20 @@ export function ShopYourLuggage() {
               src={img.image}
             />
             <div
-              className="absolute bottom-0 left-0 right-0 h-[40%] pointer-events-none"
+              className="absolute bottom-0 left-0 right-0 h-[15%] pointer-events-none"
               style={{
                 WebkitMaskImage:
-                  "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
+                  "linear-gradient(to top, black 0%, black 20%, transparent 100%)",
                 maskImage:
-                  "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
+                  "linear-gradient(to top, black 0%, black 20%, transparent 100%)",
+                backdropFilter: "blur(4px)",
+                WebkitBackdropFilter: "blur(4px)",
               }}
             />
-            <div className="absolute inset-x-0 bottom-0 h-[80%] bg-linear-to-t from-gray/20 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-[40%] bg-linear-to-t from-gray/5 to-transparent pointer-events-none" />
             <div className="absolute z-50 bottom-0 left-0 right-0 flex flex-col pb-4 gap-4 px-4">
-              <p className="text-md text-white">Well matched sets designed to cover multple trip needs.</p>
-              <button className="w-full text-green-900 hover:text-white bg-white p-3 rounded-md hover:bg-green-950 md:p-3 flex justify-center items-center">Show now</button>
+              {/* <p className="text-md text-white">Well matched sets designed to cover multple trip needs.</p>
+              <button className="w-full text-green-900 hover:text-white bg-white p-3 rounded-md hover:bg-green-950 md:p-3 flex justify-center items-center">Show now</button> */}
             </div>
           </div>
         ))}

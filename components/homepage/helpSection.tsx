@@ -35,12 +35,12 @@ export default function HelpSection() {
   return (
     <div className="w-full py-20 bg-white flex flex-col items-center md:pt-0 md:mt-0 ">
       <h2
-        className="text-3xl md:text-[21px] lg:text-[22px] md:leading-0 font-semibold text-[#3D4637] cursor-pointer font-sohne-halbfett"
+        className="text-2xl md:text-[21px] lg:text-[22px] md:leading-0 font-semibold text-[#3D4637] cursor-pointer font-sohne-halbfett"
         onClick={() => setShowChat(true)}
       >
         Still have a question?
       </h2>
-      <p className="text-[#3D4637] md:mt-4 md:font-medium md:text-sm mb-6 font-sans font-semibold">
+      <p className="text-[#3D4637] text-sm md:mt-4 md:font-medium md:text-sm mb-6 font-sans font-semibold">
         We'd love to answer.
       </p>
       <button
@@ -48,7 +48,7 @@ export default function HelpSection() {
         className="border border-[#3D4637] px-6 py-3 md:py-3 md:rounded-xs hover:bg-[#3D4637] hover:text-white transition flex justify-between items-center gap-1"
       >
         <Image src={"/assets/icons/whatsapp.png"} height={100} width={100} alt="whatsapp" className="h-6 w-6" />
-        <span className="md:text-sm md:leading-tight md:tracking-tight">
+        <span className="md:text-sm text-sm md:leading-tight md:tracking-tight">
         Contact Customer Support
         </span>
       </button>

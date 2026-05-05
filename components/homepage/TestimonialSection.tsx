@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -19,11 +19,11 @@ function StarRating({ rating }: { rating: number }) {
     <div className="flex gap-1">
       {[1, 2, 3, 4, 5].map((star) => {
         if (rating >= star) {
-          return <img key={star} className="text-[#3D4637] md:size-4 lg:size-6"  src={"/assets/icons/Star.svg"}  />;
+          return <img key={star} className="text-[#3D4637] size-4 md:size-4 " src={"/assets/icons/Star.svg"} />;
         } else if (rating >= star - 0.5) {
-          return <img key={star} className="text-[#3D4637] md:size-4 lg:size-6" sizes="45px" src={"/assets/icons/halfstar.svg"} />;
+          return <img key={star} className="text-[#3D4637] size-4 md:size-4 "  src={"/assets/icons/halfstar.svg"} />;
         } else {
-          return <img key={star} className="text-[#3D4637] md:size-4 lg:size-6" sizes="45px" src={"/assets/icons/halfstar.svg"} />;
+          return <img key={star} className="text-[#3D4637] size-4 md:size-4 " src={"/assets/icons/halfstar.svg"} />;
         }
       })}
     </div>
@@ -53,18 +53,34 @@ export default function TestimonialSection() {
   ];
 
   const [index, setIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const visibleCount = isMobile ? 1 : 3;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const next = () => {
-    setIndex((prev) => (prev + 1) % testimonials.length);
+    setIndex((prev) =>
+      prev + visibleCount >= testimonials.length ? 0 : prev + 1
+    );
   };
 
   const prev = () => {
-    setIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+    setIndex((prev) =>
+      prev === 0 ? testimonials.length - visibleCount : prev - 1
+    );
   };
 
+
   return (
-    <section className="bg-[#2f4635] text-white xl:py-20 xl:px-10 lg:px-8 md:py-14 md:px-6 px-4 py-4 " style={{backgroundImage:'url("/assets/rating-bg.svg")'}}>
-      <h2 className="xl:text-4xl lg:max-xl:text-3xl md:max-lg:text-2xl text-xl text-center md:mb-14 mb-4 font-sohne-halbfett text-[40px]">
+    <section className="bg-[#2f4635] text-white xl:py-20 xl:px-10 lg:px-8 md:py-14 md:px-6 px-4 pt-10 pb-6" style={{ backgroundImage: 'url("/assets/rating-bg.svg")' }}>
+      <h2 className="xl:text-4xl lg:max-xl:text-3xl md:text-2xl text-3xl text-center md:mb-14 mb-8 font-sohne-halbfett">
         Trusted By Travellers Who Expect More
       </h2>
 
@@ -76,17 +92,35 @@ export default function TestimonialSection() {
           <ChevronLeft />
         </button>
 
-        <div className="grid md:grid-cols-3 w-full md:gap-4 gap-4 px-4">
-          {testimonials.map((item, i) => (
-            <div key={i} className="bg-[#E6E6DC] text-black xl:p-10 lg:max-xl:p-8 md:p-8 p-4 rounded-md flex flex-col items-start justify-between">
-              <div className="mb-2">
-                <StarRating  rating={item.rating} />
+        <div className="overflow-hidden w-full px-4">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{
+              transform: `translateX(-${index * (isMobile ? 100 : 100 / 3)}%)`,
+            }}
+          >
+            {testimonials.map((item, i) => (
+              <div
+                key={i}
+                className="w-full md:w-1/3 shrink-0 px-4"
+              >
+                <div className="bg-[#E6E6DC] text-black xl:p-10 lg:max-xl:p-8 md:p-8 p-4 rounded-md flex flex-col items-start justify-between h-full">
+                  <div className="mb-4 md:mb-4">
+                    <StarRating rating={item.rating} />
+                  </div>
+                  <p className="xl:text-[24px] md:text-[16px] md:leading-6 text-sm leading-relaxed xl:mb-6 font-sans">
+                    {item.text}
+                  </p>
+                  <h3 className="xl:text-[32px] md:text-[20px] md:mt-6 text-base font-semibold font-sohne-halbfett">
+                    {item.name}
+                  </h3>
+                  <p className="text-black xl:text-[24px] lg:text-md md:text-[16px] text-sm font-sans">
+                    {item.role}
+                  </p>
+                </div>
               </div>
-              <p className="xl:text-[24px] md:text-[16px] md:leading-tight text-sm leading-relaxed xl:mb-6 font-sans">{item.text}</p>
-              <h3 className="xl:text-[32px] md:text-[20px] md:mt-6 text-base font-semibold font-sohne-halbfett">{item.name}</h3>
-              <p className=" text-black xl:text-[24px] lg:text-md md:text-[16px] text-sm font-sans">{item.role}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         <button
@@ -97,7 +131,7 @@ export default function TestimonialSection() {
         </button>
       </div>
 
-      <div className="flex justify-center md:mt-12 mt-4">
+      <div className="flex justify-center md:mt-12 mt-8">
         <button className="border border-white xl:px-25 xl:py-5 lg:max-xl:py-4 lg:max-xl:px-30 py-2 px-10 hover:bg-white hover:text-black transition">
           Read All Reviews
         </button>
