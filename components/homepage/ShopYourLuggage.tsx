@@ -45,7 +45,7 @@ export function ShopYourLuggage() {
 
 
   return (
-    <div className="flex flex-col items-center md:pt-12.5">
+    <div className="flex flex-col items-center md:pt-12.5 pt-6">
       <div className="flex flex-col gap-4 md:gap-2 xl:gap-3 w-full items-center">
         <h4 className="font-sohne-halbfett md:text-[38px] lg:text-[42px] xl:text-[60px] text-3xl text-[#3D4637] ">
           Shop Your Luggage.
@@ -54,27 +54,46 @@ export function ShopYourLuggage() {
           Different journeys demand different luggage. <br /> Choose by size,
           collection, or how you travel.
         </p>
-        <div className="md:mt-4 xl:mt-8 mt-2 flex flex-row xl:gap-5 md:items-center gap-4">
+        <div className="md:mt-4 xl:mt-8 flex flex-row xl:gap-5 md:items-center md:gap-4 gap-1">
           {
             categories.map((c, index) => <Button key={`button_${index}`} isActive={categorytype === c.category} onClick={() => setCategorytype(c.category)} >{c.label}</Button>)
           }
         </div>
       </div>
-      <div className="md:mt-8 lg:mt-9 xl:mt-12 grid md:grid-cols-4 xl:gap-5 gap-3 w-full">
+      <div className="md:mt-8 lg:mt-9 xl:mt-12 mt-6 grid grid-cols-1 md:grid-cols-4 xl:gap-5 md:gap-3 space-y-4 w-full">
         {images.map((img: any, index) => (
-          <Image
-            alt={img.image}
-            className="h-50 md:h-116 md:rounded-sm lg:h-125 xl:h-178 object-cover w-full rounded-xs"
-            height={300}
-            width={400}
-            src={img.image}
+          <div
             key={`image_${index}`}
-          />
+            className="relative h-106 md:h-116 md:rounded-sm lg:h-125 xl:h-178 object-cover w-full rounded-xl overflow-hidden">
+            <Image
+              alt={img.image}
+              className="object-cover h-full"
+              height={300}
+              width={400}
+              src={img.image}
+            />
+            <div
+              className="absolute bottom-0 left-0 right-0 h-[40%] pointer-events-none"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
+                maskImage:
+                  "linear-gradient(to top, black 0%, black 40%, transparent 100%)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+              }}
+            />
+            <div className="absolute inset-x-0 bottom-0 h-[80%] bg-linear-to-t from-gray/20 to-transparent pointer-events-none" />
+            <div className="absolute z-50 bottom-0 left-0 right-0 flex flex-col pb-4 gap-4 px-4">
+              <p className="text-md text-white">Well matched sets designed to cover multple trip needs.</p>
+              <button className="w-full text-green-900 hover:text-white bg-white p-3 rounded-md hover:bg-green-950 md:p-3 flex justify-center items-center">Show now</button>
+            </div>
+          </div>
         ))}
       </div>
       <div className="flex w-full justify-center items-center">
         <button className="md:w-[30%] xl:w-[28%] md:text-[13px] xl:text-lg xl:p-5.5 md:font-thin xl:mt-12 md:mt-8 lg:mt-9 lg:p-4 md:p-3.5 w-full mt-4 font-sans font-normal text-white text-base bg-[#304B39] p-4 rounded-sm">Shop All</button>
       </div>
-    </div>
+    </div >
   );
 }

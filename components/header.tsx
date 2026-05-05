@@ -168,12 +168,12 @@ export default function Header() {
 
         <img src="/logo.svg" className="h-6" />
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1">
           <button
             className="p-1.5 rounded-full bg-gray-200"
             onClick={() => setSearchOpen(true)}
           >
-            
+            <img className="text-gray-500 w-5 h-5" src="/assets/icons/search.svg" />
           </button>
           <button className="p-1.5 rounded-full bg-gray-200">
             <img src="/assets/icons/Vector.svg" className="w-5 h-5" />
@@ -229,7 +229,7 @@ export default function Header() {
 
             <div className="flex items-center gap-3 justify-end">
               <div className="flex items-center justify-center bg-[#F0F0E6] px-2.5 md:h-7 lg:h-10 lg:w-50  w-45 md:w-35 border border-gray-300 rounded-full gap-2">
-                <img className="text-gray-500 md:size-5" src="/assets/icons/search.svg"  />
+                <img className="text-gray-500 md:size-5" src="/assets/icons/search.svg" />
                 <input
                   type="text"
                   placeholder="Search"

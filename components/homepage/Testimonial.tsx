@@ -62,9 +62,9 @@ export function Testimonial() {
   ];
 
   return (
-    <div className="bg-[#25282A] xl:px-36 xl:py-19 lg:px-26 md:px-24 md:py-14 md:rounded-2xl xl:rounded-3xl p-4 flex flex-col md:flex-row">
-      <div className="flex w-[44%] lg:w-[43%] flex-col justify-between">
-        <h4 className="font-sans-dirt uppercase  md:text-[52px] md:leading-14 lg:text-[57px] xl:text-[80px] xl:leading-22 lg:leading-16 text-3xl text-[#D9D9D6] ">
+    <div className="bg-[#25282A] rounded-2xl xl:px-36 xl:py-19 lg:px-26 md:px-24 md:py-14 md:rounded-2xl xl:rounded-3xl p-4 pt-12 pb-6 flex flex-col md:flex-row">
+      <div className="flex md:w-[44%] lg:w-[43%] flex-col justify-between">
+        <h4 className="font-sans-dirt uppercase text-4xl md:text-[52px] md:leading-14 lg:text-[57px] xl:text-[80px] xl:leading-22 lg:leading-16 text-[#D9D9D6] ">
           Tested for everyday
           travel use.
         </h4>

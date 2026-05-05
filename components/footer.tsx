@@ -17,7 +17,7 @@ export type Section = {
 export function FooterColumn({ title, links }: Section) {
     return (
         <div className="flex flex-col md:gap-4 xl:gap-8">
-            <h3 className="text-[#B9D531] font-semibold font-sohne-halbfett lg:w-[70%] md:w-[75%] tracking-wider xl:text-2xl md:text-sm lg:text-md text-md">{title}</h3>
+            <h3 className="text-[#B9D531] font-semibold font-sohne-halbfett tracking-wider xl:text-2xl md:text-sm lg:text-md text-md">{title}</h3>
             <div className="flex flex-col gap-2 xl:gap-3">
                 {links.map((item, index) => {
                     if (typeof item === "string") {
@@ -66,7 +66,7 @@ export default function Footer() {
         },
         {
             col: 1,
-            title: "SHOP BY\nCOLLECTION",
+            title: "SHOP BY COLLECTION",
             links: [
                 {
                     title: "Phoenix",
@@ -127,7 +127,7 @@ export default function Footer() {
     const col3: Section[] = [
         {
             col: 3,
-            title: "SUPPORT &\nSERVICES",
+            title: "SUPPORT & SERVICES",
             links: [
                 "Track Your Order",
                 "Returns & Exchanges",
