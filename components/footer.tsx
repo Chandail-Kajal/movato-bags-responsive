@@ -66,7 +66,7 @@ export default function Footer() {
         },
         {
             col: 1,
-            title: "SHOP BY COLLECTION",
+            title: "SHOP BY\nCOLLECTION",
             links: [
                 {
                     title: "Phoenix",
@@ -127,7 +127,7 @@ export default function Footer() {
     const col3: Section[] = [
         {
             col: 3,
-            title: "SUPPORT & SERVICES",
+            title: "SUPPORT &\nSERVICES",
             links: [
                 "Track Your Order",
                 "Returns & Exchanges",
