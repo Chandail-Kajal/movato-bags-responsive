@@ -4,6 +4,9 @@ const shopSectionSchema = new mongoose.Schema(
   {
     image: { type: String, required: true },
 
+    buttonTitle: { type: String, default: "" },
+    caption: { type: String, default: "" },
+
     isActive: { type: Boolean, default: true },
 
     order: { type: Number, default: 0 },
