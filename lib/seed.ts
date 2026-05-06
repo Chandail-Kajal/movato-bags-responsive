@@ -24,13 +24,13 @@ export const seed = async () => {
     try {
         await connectDb();
 
-        console.log("🌱 Seeding started...");
+        console.log(" Seeding started...");
 
         const existing = await CategoryModel.countDocuments()
         if (existing > 0) return
 
         for (const type of categoryTypes) {
-            // 1️⃣ Create or find CategoryType
+            // 1 Create or find CategoryType
             let typeDoc = await CategoryTypeModel.findOne({
                 slug: slugify(type.name),
             });
@@ -40,12 +40,12 @@ export const seed = async () => {
                     name: type.name,
                     slug: slugify(type.name),
                 });
-                console.log(`✅ Created type: ${type.name}`);
+                console.log(`Created type: ${type.name}`);
             } else {
-                console.log(`⚡ Type exists: ${type.name}`);
+                console.log(` Type exists: ${type.name}`);
             }
 
-            // 2️⃣ Create Categories
+            // 2 Create Categories
             for (const cat of type.categories) {
                 const exists = await CategoryModel.findOne({
                     slug: slugify(cat),
@@ -66,7 +66,7 @@ export const seed = async () => {
             }
         }
 
-        console.log("🎉 Seeding complete");
+        console.log(" Seeding complete");
         process.exit(0);
     } catch (error) {
         console.error(error);

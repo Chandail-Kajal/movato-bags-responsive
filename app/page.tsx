@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import FAQ from "@/components/homepage/FAQ";
@@ -10,6 +11,7 @@ import { Testimonial } from "@/components/homepage/Testimonial";
 import TestimonialSection from "@/components/homepage/TestimonialSection";
 import { fetchPublicData } from "@/lib/api";
 import { PropsWithChildren } from "react";
+import { seed } from "@/lib/seed";
 
 
 
@@ -19,6 +21,7 @@ const Section = ({ children }: PropsWithChildren) => {
 
 export default async function Home() {
   const slides = await fetchPublicData("hero")
+  
   return (
     <>
       <Header />

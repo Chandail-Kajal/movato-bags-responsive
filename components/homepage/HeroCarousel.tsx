@@ -45,16 +45,18 @@ export function HeroCarousel({ slides }: Props) {
               alt="slide"
               width={1920}
               height={1280}
-              className="w-full h-100 md:h-132 lg:h-142 object-cover xl:h-200"
+              className={`w-full h-100 md:h-132 lg:h-142 xl:h-200 object-cover ${
+    index === 0 ? "object-center" : "object-right"
+  }`}
             />
 
-            <div className="md:absolute md:inset-0 mb-6 mt-6 md:mt-0 flex items-end md:ml-10 lg:mb-10 xl:mb-14 xl:ml-14 md:mb-6">
+            <div className="md:absolute md:inset-0 mb-10 mt-6 md:mt-0 flex items-end md:ml-10 lg:mb-10 xl:mb-14 xl:ml-14 md:mb-6">
               <div className="md:w-[36%] w-full text-[#3D4637] flex flex-col">
                 <h1 className="font-black text-4xl font-sohne-extrafett uppercase xl:text-[110px] xl:leading-24 lg:text-[76px] lg:leading-17 md:text-7xl md:leading-16">
                   {slide.title}
                 </h1>
 
-                <p className="text-base mt-3 w-full xl:text-[22px] lg:text-[16px] md:text-md md:leading-5.5 md:mt-2 font-sans font-medium leading-5   text-[#304B39] xl:mt-4">
+                <p className="text-base mt-3 w-full xl:text-[22px] lg:text-[16px] md:text-md md:leading-5.5 md:mt-2 font-sans font-medium leading-5 text-[#304B39] xl:mt-4">
                   {slide.description}
                 </p>
 
