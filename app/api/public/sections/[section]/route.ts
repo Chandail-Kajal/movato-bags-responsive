@@ -3,11 +3,14 @@ import { connectDb } from "@/lib/db";
 import { CategoryTypeModel, HeroSectionModel, ShopSectionModel } from "@/models";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: Record<string, string> }) {
+export async function GET(
+  req: NextRequest,
+  context: { params: Promise<{ section: string }> }
+) {
   try {
     await connectDb();
 
-    const { section } = await params;
+    const { section } = await context.params;
     const searchParams = req.nextUrl.searchParams;
 
     let data: any[] = [];

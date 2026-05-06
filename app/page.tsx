@@ -12,6 +12,7 @@ import TestimonialSection from "@/components/homepage/TestimonialSection";
 import { fetchPublicData } from "@/lib/api";
 import { PropsWithChildren } from "react";
 import { seed } from "@/lib/seed";
+import ChatWidget from "@/components/chat/ChatWidget";
 
 
 
@@ -56,6 +57,7 @@ export default async function Home() {
         </Section>
         <Footer />
       </div>
+      <ChatWidget />
     </>
   );
 }
