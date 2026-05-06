@@ -27,6 +27,7 @@ export function ShopYourLuggage() {
   const [images, setImages] = useState([])
   const [types, setTypes] = useState<any[]>([])
   const [categorytype, setCategorytype] = useState<string>("size")
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -71,36 +72,60 @@ export function ShopYourLuggage() {
           }
         </div>
       </div>
-      <div className="md:mt-8 lg:mt-9 xl:mt-12 mt-6 grid grid-cols-1 md:grid-cols-4 xl:gap-5 md:gap-3 space-y-4 w-full">
-        {images.map((img: any, index) => (
+      <div className="md:mt-8 lg:mt-9 xl:mt-12 mt-6 w-full">
+        <div className="md:hidden overflow-hidden w-full">
           <div
-            key={`image_${index}`}
-            className="relative h-106 md:h-116 md:rounded-sm lg:h-125 xl:h-178 object-cover w-full rounded-xl overflow-hidden">
-            <Image
-              alt={img.image}
-              className="object-cover h-full"
-              height={300}
-              width={400}
-              src={img.image}
-            />
-            <div
-              className="absolute bottom-0 left-0 right-0 h-[15%] pointer-events-none"
-              style={{
-                WebkitMaskImage:
-                  "linear-gradient(to top, black 0%, black 20%, transparent 100%)",
-                maskImage:
-                  "linear-gradient(to top, black 0%, black 20%, transparent 100%)",
-                backdropFilter: "blur(4px)",
-                WebkitBackdropFilter: "blur(4px)",
-              }}
-            />
-            <div className="absolute inset-x-0 bottom-0 h-[40%] bg-linear-to-t from-gray/5 to-transparent pointer-events-none" />
-            <div className="absolute z-50 bottom-0 left-0 right-0 flex flex-col pb-4 gap-4 px-4">
-              {/* <p className="text-md text-white">Well matched sets designed to cover multple trip needs.</p>
-              <button className="w-full text-green-900 hover:text-white bg-white p-3 rounded-md hover:bg-green-950 md:p-3 flex justify-center items-center">Show now</button> */}
-            </div>
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+            }}
+          >
+            {images.map((img: any, index) => (
+              <div
+                key={`image_${index}`}
+                className="min-w-full px-2"
+              >
+                <div className="relative h-106 rounded-xl overflow-hidden">
+                  <Image
+                    alt={img.image}
+                    className="object-cover h-full w-full"
+                    height={300}
+                    width={400}
+                    src={img.image}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+
+          <div className="flex justify-center mt-3 gap-2">
+            {images.map((_: any, index: number) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`h-2 w-2 rounded-full transition-all ${currentIndex === index ? "bg-[#304B39] w-4" : "bg-gray-300"
+                  }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden md:grid grid-cols-4 xl:gap-5 md:gap-3 space-y-4 w-full">
+          {images.map((img: any, index) => (
+            <div
+              key={`image_${index}`}
+              className="relative h-106 md:h-116 md:rounded-sm lg:h-125 xl:h-178 object-cover w-full rounded-xl overflow-hidden"
+            >
+              <Image
+                alt={img.image}
+                className="object-cover h-full"
+                height={300}
+                width={400}
+                src={img.image}
+              />
+            </div>
+          ))}
+        </div>
       </div>
       <div className="flex w-full justify-center items-center">
         <button className="md:w-[30%] xl:w-[28%] md:text-[13px] xl:text-lg xl:p-5.5 md:font-thin xl:mt-12 md:mt-8 lg:mt-9 lg:p-4 md:p-3.5 w-full mt-4 font-sans font-normal text-white text-base bg-[#304B39] p-4 rounded-sm">Shop All</button>
