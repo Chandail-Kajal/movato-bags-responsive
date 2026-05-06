@@ -251,7 +251,7 @@ export default function Header() {
           </div>
 
           {activeMenu && (
-            <div className=" w-full flex flex-row gap-4 justify-between items-start bg-amber-900 absolute z-99 top-19">
+            <div className=" w-full flex flex-row gap-4 justify-between items-start bg-amber-900 absolute z-99 top-34">
               <div className="absolute inset-0 min-h-94 ">
                 <Image
                   src="/assets/images/header-1.jpeg"
@@ -261,7 +261,7 @@ export default function Header() {
                   className="h-full"
                 />
               </div>
-              <div className="absolute inset-0 w-full flex flex-row justify-between text-black">
+              <div className="absolute inset-0 w-full flex flex-row justify-between text-black ">
                 {activeMenu === "Shop" && (
                   <>
                     <div className="w-1/2 grid grid-cols-3 px-10 py-4 ">

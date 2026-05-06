@@ -62,6 +62,7 @@ export function HeroCarousel({ slides }: Props) {
 
                 <div className="flex flex-col mt-4 gap-3 md:mt-8 xl:mt-12 lg:mt-6 xl:text-[20px] lg:text-sm md:text-xs xl:gap-4 lg:gap-4 md:gap-3">
                   {slide.primaryBtn && (
+
                     <button className="bg-[#2F4A36] text-white xl:py-5.5 lg:py-4 md:py-4 md:rounded-xs py-3 rounded-md">
                       {slide.primaryBtn}
                     </button>

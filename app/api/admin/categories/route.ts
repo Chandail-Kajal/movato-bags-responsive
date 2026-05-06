@@ -110,7 +110,7 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    // ❗ Prevent delete if used in shop sections
+    //  Prevent delete if used in shop sections
     const inUse = await ShopSectionModel.findOne({
       categories: id,
     });
