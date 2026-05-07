@@ -48,7 +48,7 @@ export default function SupportSection() {
               <div key={index} className="flex flex-col w-full md:w-40 xl:w-65 gap-2">
                 <div className="flex flex-col gap-4 xl:gap-8">
                   <Image alt={feature.title} className="xl:h-18 xl:w-18 lg:h-12 lg:w-12 md:h-10 md:w-10 h-14 w-14 text-black" src={feature.path} width={100} height={100}></Image>
-                  <h3 className="text-[#DB6B30] font-sans w-[80%] text-xl leading-5 xl:leading-6 lg:text-[18px] md:text-[16px] md:leading-4 font-semibold lg:max-xl:text-md xl:text-[24px] uppercase">
+                  <h3 className="text-[#DB6B30] font-sans w-[80%] lg:w-[60%] text-xl leading-5 xl:leading-6 lg:text-[18px] md:text-[16px] md:leading-4 font-semibold lg:max-xl:text-md xl:text-[24px] uppercase">
                     {feature.title}
                   </h3>
                 </div>

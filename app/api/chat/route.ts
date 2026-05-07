@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const runtime = "nodejs";
 
 import { connectDb } from "@/lib/db";
@@ -50,6 +51,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as ChatBody;
     const message = (body?.message ?? "").trim();
+    console.log (message)
 
     if (!message) {
       return NextResponse.json(
@@ -60,6 +62,7 @@ export async function POST(req: NextRequest) {
 
     const catalog = await getCatalogContextForAI();
     const client = getOpenAIClient();
+    console.log(catalog)
 
     const completion = await client.chat.completions.create({
       model: process.env.OPENAI_MODEL || "gpt-4.1-mini",

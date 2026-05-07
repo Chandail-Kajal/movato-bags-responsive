@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { BsChatLeftTextFill } from "react-icons/bs";
 
 type ChatMsg = {
   role: "user" | "assistant";
@@ -74,10 +77,11 @@ export default function ChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-[100]">
+    <div className="fixed bottom-4 right-4 z-100">
       {open && (
-        <div className="mb-3 w-[92vw] max-w-[360px] overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl">
+        <div className="mb-3 w-[92vw] max-w-90 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl">
           <div className="flex items-center justify-between bg-[#304B39] px-4 py-3 text-white">
+          
             <div className="flex flex-col">
               <div className="text-sm font-semibold leading-tight">Movato AI</div>
               <div className="text-xs text-white/80 leading-tight">
@@ -93,7 +97,7 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          <div ref={scrollRef} className="h-[360px] overflow-y-auto p-3 space-y-2">
+          <div ref={scrollRef} className="h-90 overflow-y-auto p-3 space-y-2">
             {messages.map((m, idx) => (
               <div
                 key={idx}
@@ -142,11 +146,14 @@ export default function ChatWidget() {
 
       <button
         onClick={() => setOpen((v) => !v)}
-        className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#304B39] text-white shadow-lg hover:brightness-110"
+        className="ml-auto flex h-20 w-20 items-center justify-center rounded-full bg-white  shadow-lg hover:brightness-110 border-2 border-[#304B39]"
         aria-label={open ? "Close chat" : "Open chat"}
       >
-        {open ? "—" : "Chat"}
+        {open ? ((
+  <Image src="/assets/icons/airobot.jpg" height={55} width={55} alt="robot" className="bg-[#304B39] rounded-full"
+  />) ): (<Image src={"/assets/icons/airobot.jpg"} height={55} width={55} alt="robot" className="bg-[#304B39] rounded-full" />)}
       </button>
+      
     </div>
   );
 }
