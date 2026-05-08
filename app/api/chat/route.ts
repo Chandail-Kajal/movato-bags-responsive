@@ -2,7 +2,10 @@
 export const runtime = "nodejs";
 
 import { connectDb } from "@/lib/db";
-import { ShopSectionModel } from "@/models";
+import {
+  ProductModel,
+} from "@/models/ProductModel";
+
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
@@ -12,87 +15,198 @@ type ChatBody = {
 
 function getOpenAIClient() {
   const apiKey = process.env.OPENAI_API_KEY;
+
   if (!apiKey) {
-    throw new Error("Missing OPENAI_API_KEY in environment");
+    throw new Error("Missing OPENAI_API_KEY");
   }
+
   return new OpenAI({ apiKey });
 }
 
 async function getCatalogContextForAI() {
   await connectDb();
 
-  const shop = await ShopSectionModel.find({ isActive: true })
-    .sort({ order: 1 })
-    .populate("categoryType")
-    .populate("categories")
+  const products = await ProductModel.find()
+    .populate({
+      path: "categories",
+      populate: {
+        path: "type",
+        model: "CategoryType",
+      },
+    })
     .lean();
 
-  // Keep context small + user-friendly (avoid dumping full Mongo docs).
-  const items = shop.map((s: any) => ({
-    buttonTitle: typeof s.buttonTitle === "string" ? s.buttonTitle : "",
-    caption: typeof s.caption === "string" ? s.caption : "",
-    categoryType: s?.categoryType?.name ?? s?.categoryType?.slug ?? "",
-    categories: Array.isArray(s?.categories)
-      ? s.categories
-          .map((c: any) => c?.name ?? c?.slug ?? "")
-          .filter(Boolean)
-      : [],
-    image: typeof s.image === "string" ? s.image : "",
-  }));
+  const formattedProducts = products.map((p: any) => {
+    const categories = Array.isArray(p.categories)
+      ? p.categories.map((c: any) => ({
+        name: c.name,
+        slug: c.slug,
+
+        type: c.type
+          ? {
+            name: c.type.name,
+            slug: c.type.slug,
+          }
+          : null,
+      }))
+      : [];
+
+    const primaryCategory = categories[0];
+
+    const productSlug = p.name
+      .toLowerCase()
+      .replace(/\s+/g, "-");
+
+    return {
+      id: p._id,
+      name: p.name,
+      description: p.description,
+      price: p.price,
+
+      categories,
+
+      links: primaryCategory
+        ? {
+          categoryType: `/products/${primaryCategory.type?.slug}`,
+
+          category: `/products/${primaryCategory.type?.slug}/${primaryCategory.slug}`,
+
+          product: `/products/${primaryCategory.type?.slug}/${primaryCategory.slug}/${productSlug}`,
+        }
+        : null,
+    };
+  });
 
   return {
-    source: "shop-sections",
-    count: items.length,
-    items,
+    totalProducts: formattedProducts.length,
+    products: formattedProducts || [],
   };
 }
+
 
 export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as ChatBody;
-    const message = (body?.message ?? "").trim();
-    console.log (message)
+
+    const message = body?.message?.trim();
 
     if (!message) {
       return NextResponse.json(
-        { success: false, error: "Message is required" },
+        {
+          success: false,
+          error: "Message is required",
+        },
         { status: 400 }
       );
     }
 
     const catalog = await getCatalogContextForAI();
+
     const client = getOpenAIClient();
-    console.log(catalog)
 
     const completion = await client.chat.completions.create({
       model: process.env.OPENAI_MODEL || "gpt-4.1-mini",
-      temperature: 0.4,
+
+      temperature: 0.3,
+
       messages: [
         {
           role: "system",
-          content:
-            "You are Movato's helpful shopping assistant. Use the provided catalog context to answer questions. " +
-            "If the catalog context doesn't contain the info, say what you do know and ask a short follow-up question. " +
-            "Be concise, friendly, and avoid hallucinating product specs.",
+          content: `
+                    You are Movato's AI shopping assistant.
+
+                    Rules:
+                    - Only use the provided catalog data
+                    - Never invent products or prices
+                    - Recommend products based on categories and descriptions
+                    - Keep responses concise and helpful
+                    - If no matching product exists, say so clearly
+                    - Mention prices when relevant
+
+                    IMPORTANT FORMAT RULES:
+                    - Return valid HTML only
+                    - Do NOT return markdown
+                    - Do NOT use backticks
+                    - Use semantic HTML tags only
+
+                    Allowed tags:
+                    <div>
+                    <p>
+                    <ul>
+                    <li>
+                    <strong>
+                    <a>
+                    <br>
+
+                    For links:
+                    - Use relative URLs exactly as provided
+                    - Example:
+                    <a href="/products/size/large">Large Bags</a>
+
+                    Example response:
+                    <div>
+                      <p>I found two large bags for you:</p>
+
+                      <ul>
+                        <li>
+                          <strong>Phoenix Travel Bag</strong><br>
+                          Large travel bag for mountain and weekend trips.<br>
+                          Price: $49.99<br>
+                          <a href="/products/size/large/phoenix-travel-bag">
+                            View product
+                          </a>
+                        </li>
+
+                        <li>
+                          <strong>Madison Long Trip Bag</strong><br>
+                          Large luggage for long trips.<br>
+                          Price: $69.99<br>
+                          <a href="/products/size/large/madison-long-trip-bag">
+                            View product
+                          </a>
+                        </li>
+                      </ul>
+
+                      <p>
+                        <a href="/products/size/large">
+                          Browse all large bags
+                        </a>
+                      </p>
+                    </div>
+                    `,
         },
         {
           role: "system",
-          content: `Catalog context (JSON):\n${JSON.stringify(catalog)}`,
+          content: `CATALOG:\n${JSON.stringify(catalog)}`,
         },
-        { role: "user", content: message },
+
+        {
+          role: "user",
+          content: message,
+        },
       ],
     });
 
-    const text = completion.choices?.[0]?.message?.content?.trim() || "";
+    const reply =
+      completion.choices?.[0]?.message?.content?.trim() ||
+      "Sorry, I couldn't generate a response.";
 
     return NextResponse.json({
       success: true,
-      reply: text || "Sorry — I couldn’t generate a response. Try again.",
+      reply,
     });
   } catch (err: any) {
-    const message =
-      typeof err?.message === "string" ? err.message : "Unexpected error";
-    return NextResponse.json({ success: false, error: message }, { status: 500 });
+    console.error(err);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error:
+          typeof err?.message === "string"
+            ? err.message
+            : "Unexpected error",
+      },
+      { status: 500 }
+    );
   }
 }
-

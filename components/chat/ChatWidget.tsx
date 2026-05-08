@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import Image from "next/image";
+import DOMPurify from "isomorphic-dompurify";
+import { MessageCircle, MinusCircle } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { BsChatLeftTextFill } from "react-icons/bs";
 
 type ChatMsg = {
   role: "user" | "assistant";
@@ -13,40 +13,69 @@ type ChatMsg = {
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+
   const [messages, setMessages] = useState<ChatMsg[]>([
     {
       role: "assistant",
-      content:
-        "Hi! I’m Movato’s assistant. Tell me your trip type and I’ll suggest the right luggage.",
+      content: `
+        <div>
+          <p>
+            Hi! I’m <strong>Movato’s assistant</strong>.
+          </p>
+
+          <p>
+            Tell me your trip type and I’ll suggest the right luggage.
+          </p>
+        </div>
+      `,
     },
   ]);
+
   const [isSending, setIsSending] = useState(false);
+
   const canSend = useMemo(
     () => input.trim().length > 0 && !isSending,
     [input, isSending]
   );
+
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
+
     const el = scrollRef.current;
+
     if (!el) return;
+
     el.scrollTop = el.scrollHeight;
   }, [open, messages.length, isSending]);
 
   async function send() {
     const message = input.trim();
+
     if (!message || isSending) return;
 
     setInput("");
     setIsSending(true);
-    setMessages((m) => [...m, { role: "user", content: message }]);
+
+    setMessages((m) => [
+      ...m,
+      {
+        role: "user",
+        content: message,
+      },
+    ]);
 
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          message,
+        }),
       });
 
       const data = (await res.json()) as
@@ -55,20 +84,43 @@ export default function ChatWidget() {
 
       if (!res.ok || !data.success) {
         const error = (data as any)?.error || "Request failed";
+
         setMessages((m) => [
           ...m,
-          { role: "assistant", content: `Sorry — ${error}.` },
+          {
+            role: "assistant",
+            content: `
+              <div>
+                <p>Sorry — ${error}</p>
+              </div>
+            `,
+          },
         ]);
+
         return;
       }
 
-      setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
+      const cleanHtml = DOMPurify.sanitize(data.reply);
+
+      setMessages((m) => [
+        ...m,
+        {
+          role: "assistant",
+          content: cleanHtml,
+        },
+      ]);
     } catch {
       setMessages((m) => [
         ...m,
         {
           role: "assistant",
-          content: "Sorry — something went wrong sending that message.",
+          content: `
+            <div>
+              <p>
+                Sorry — something went wrong sending that message.
+              </p>
+            </div>
+          `,
         },
       ]);
     } finally {
@@ -77,17 +129,20 @@ export default function ChatWidget() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-100">
+    <div className="fixed bottom-4 right-4 z-[100]">
       {open && (
-        <div className="mb-3 w-[92vw] max-w-90 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl">
+        <div className="mb-3 w-[92vw] max-w-[360px] overflow-hidden rounded-2xl border border-black/10 bg-white shadow-xl">
           <div className="flex items-center justify-between bg-[#304B39] px-4 py-3 text-white">
-          
             <div className="flex flex-col">
-              <div className="text-sm font-semibold leading-tight">Movato AI</div>
-              <div className="text-xs text-white/80 leading-tight">
+              <div className="text-sm font-semibold leading-tight">
+                Movato AI
+              </div>
+
+              <div className="text-xs leading-tight text-white/80">
                 Catalog-aware assistant
               </div>
             </div>
+
             <button
               onClick={() => setOpen(false)}
               className="rounded-lg px-2 py-1 text-sm text-white/90 hover:bg-white/10"
@@ -97,7 +152,10 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          <div ref={scrollRef} className="h-90 overflow-y-auto p-3 space-y-2">
+          <div
+            ref={scrollRef}
+            className="h-[360px] overflow-y-auto p-3 space-y-3"
+          >
             {messages.map((m, idx) => (
               <div
                 key={idx}
@@ -108,9 +166,19 @@ export default function ChatWidget() {
                     : "mr-auto bg-gray-100 text-gray-900",
                 ].join(" ")}
               >
-                {m.content}
+                {m.role === "user" ? (
+                  m.content
+                ) : (
+                  <div
+                    className="prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-1"
+                    dangerouslySetInnerHTML={{
+                      __html: m.content,
+                    }}
+                  />
+                )}
               </div>
             ))}
+
             {isSending && (
               <div className="mr-auto max-w-[90%] rounded-2xl bg-gray-100 px-3 py-2 text-xs text-gray-700">
                 Thinking…
@@ -124,11 +192,14 @@ export default function ChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") send();
+                  if (e.key === "Enter") {
+                    send();
+                  }
                 }}
                 placeholder="Type your message…"
                 className="flex-1 rounded-xl border border-black/10 px-3 py-2 text-xs outline-none focus:ring-2 focus:ring-[#304B39]/30"
               />
+
               <button
                 onClick={send}
                 disabled={!canSend}
@@ -137,6 +208,7 @@ export default function ChatWidget() {
                 Send
               </button>
             </div>
+
             <div className="mt-2 text-[11px] text-gray-500">
               Try: “cabin luggage for weekend trip”
             </div>
@@ -146,15 +218,11 @@ export default function ChatWidget() {
 
       <button
         onClick={() => setOpen((v) => !v)}
-        className="ml-auto flex h-20 w-20 items-center justify-center rounded-full bg-white  shadow-lg hover:brightness-110 border-2 border-[#304B39]"
+        className="ml-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#304B39] text-white shadow-lg hover:brightness-110"
         aria-label={open ? "Close chat" : "Open chat"}
       >
-        {open ? ((
-  <Image src="/assets/icons/airobot.jpg" height={55} width={55} alt="robot" className="bg-[#304B39] rounded-full"
-  />) ): (<Image src={"/assets/icons/airobot.jpg"} height={55} width={55} alt="robot" className="bg-[#304B39] rounded-full" />)}
+        {open ? <MinusCircle /> : <MessageCircle />}
       </button>
-      
     </div>
   );
 }
-
