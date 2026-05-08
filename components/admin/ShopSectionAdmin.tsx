@@ -150,7 +150,7 @@ export function ShopSectionAdmin() {
                         className="w-32 h-20 object-cover rounded"
                       />
 
-                      {/* INFO */}
+                    
                       <div className="flex flex-col gap-1">
                         <span className="font-semibold">
                           {item.categoryType?.name}
@@ -174,7 +174,7 @@ export function ShopSectionAdmin() {
                         )}
                       </div>
 
-                      {/* ACTIVE TOGGLE */}
+                   
                       <div
                         onClick={() => toggleActive(item)}
                         className={`ml-auto w-10 h-5 flex items-center p-1 rounded-full cursor-pointer ${

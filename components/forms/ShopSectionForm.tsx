@@ -34,13 +34,11 @@ export const ShopSecitonForm = ({
   const [types, setTypes] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
 
-  // 🔥 Fetch category types
   const fetchTypes = async () => {
     const res = await api.get("/admin/category-types");
     setTypes(res.data.data || []);
   };
 
-  // 🔥 Fetch categories by type
   const fetchCategories = async (typeId: string) => {
     const res = await api.get(`/admin/categories?type=${typeId}`);
     setCategories(res.data.data || []);
@@ -93,7 +91,6 @@ export const ShopSecitonForm = ({
     },
   });
 
-  // 🔁 Load categories when type changes
   useEffect(() => {
     if (formik.values.categoryType) {
       fetchCategories(formik.values.categoryType);
@@ -116,7 +113,6 @@ export const ShopSecitonForm = ({
   return (
     <form onSubmit={formik.handleSubmit} className="space-y-4">
 
-      {/* IMAGE PREVIEW */}
       {typeof formik.values.image === "string" &&
         formik.values.image && (
           <Image
@@ -136,7 +132,6 @@ export const ShopSecitonForm = ({
         }}
       />
 
-      {/* CATEGORY TYPE */}
       <Select
         value={formik.values.categoryType}
         onValueChange={(value) =>
@@ -156,7 +151,6 @@ export const ShopSecitonForm = ({
         </SelectContent>
       </Select>
 
-      {/* CATEGORIES MULTI SELECT */}
       {categories.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {categories.map((cat) => {
@@ -186,7 +180,6 @@ export const ShopSecitonForm = ({
         </p>
       )}
 
-      {/* BUTTON TITLE */}
       <Input
         placeholder="Button Title"
         {...formik.getFieldProps("buttonTitle")}

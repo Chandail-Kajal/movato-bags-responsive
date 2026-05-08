@@ -4,6 +4,8 @@ const ProductSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
   price: { type: Number, required: true },
+  image: { type: String, required: true },
+
   
   // This array allows the product to have multiple categories 
   // (e.g., "Large" from Size, "Mountains" from Collection, etc.)

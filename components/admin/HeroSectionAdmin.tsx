@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -108,7 +109,7 @@ export function HeroAdmin() {
 
   return (
     <div className="p-6 mx-auto w-full min-h-screen bg-white text-gray-800">
-      {/* Header */}
+      
       <div className="flex justify-between mb-6">
         <h1 className="text-2xl font-bold">Hero Banner Admin</h1>
 
@@ -131,7 +132,6 @@ export function HeroAdmin() {
         </div>
       </div>
 
-      {/* Drag List */}
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId="list">
           {(provided) => (
@@ -148,7 +148,7 @@ export function HeroAdmin() {
                       {...provided.draggableProps}
                       className="bg-white shadow rounded-xl p-3 mb-4 flex items-center gap-3"
                     >
-                      {/* Drag */}
+                      
                       <div
                         {...provided.dragHandleProps}
                         className="cursor-grab text-gray-400"
@@ -156,14 +156,13 @@ export function HeroAdmin() {
                         ☰
                       </div>
 
-                      {/* Image */}
+                      
                       <img
                         src={item.image}
                         className="w-28 h-16 object-cover rounded"
                         alt=""
                       />
 
-                      {/* Content */}
                       <div>
                         <p className="font-semibold">{item.title}</p>
                         <p className="text-xs text-gray-500">
@@ -171,7 +170,7 @@ export function HeroAdmin() {
                         </p>
                       </div>
 
-                      {/* Toggle */}
+                      
                       <div
                         onClick={() => toggleActive(item)}
                         className={`ml-auto w-10 h-5 flex items-center rounded-full p-1 cursor-pointer ${item.isActive ? "bg-green-500" : "bg-gray-300"
@@ -183,7 +182,7 @@ export function HeroAdmin() {
                         />
                       </div>
 
-                      {/* Buttons */}
+                  
                       <div className="flex gap-2 ml-3">
                         <button
                           onClick={() => openEdit(item)}

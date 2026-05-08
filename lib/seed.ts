@@ -30,7 +30,7 @@ export const seed = async () => {
         if (existing > 0) return
 
         for (const type of categoryTypes) {
-            // 1 Create or find CategoryType
+            
             let typeDoc = await CategoryTypeModel.findOne({
                 slug: slugify(type.name),
             });
@@ -45,7 +45,7 @@ export const seed = async () => {
                 console.log(` Type exists: ${type.name}`);
             }
 
-            // 2 Create Categories
+            
             for (const cat of type.categories) {
                 const exists = await CategoryModel.findOne({
                     slug: slugify(cat),

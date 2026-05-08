@@ -80,7 +80,6 @@ export const HeroForm = ({ editItem, onClose, refresh, items }: any) => {
                 }}
             />
 
-            {/* Inputs */}
             <Input
                 placeholder="Title"
                 {...formik.getFieldProps("title")}
@@ -103,7 +102,6 @@ export const HeroForm = ({ editItem, onClose, refresh, items }: any) => {
                 {...formik.getFieldProps("secondaryBtn")}
             />
 
-            {/* Actions */}
             <div className="flex justify-end gap-2">
                 <Button type="button" variant="ghost" onClick={onClose}>
                     Cancel

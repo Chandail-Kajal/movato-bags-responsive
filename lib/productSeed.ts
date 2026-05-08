@@ -10,6 +10,7 @@ const products = [
     description: "Large travel bag for mountain and weekend trips",
     price: 4999,
 
+
     categories: [
       { type: "SIZE", value: "large" },
       { type: "COLLECTION", value: "Phoenix" },
@@ -58,7 +59,6 @@ export const seedProducts = async () => {
     for (const product of products) {
       const categoryIds = [];
 
-      // Find categories from DB
       for (const cat of product.categories) {
         const categoryDoc = await CategoryModel.findOne({
           name: cat.value,
@@ -69,12 +69,12 @@ export const seedProducts = async () => {
         }
       }
 
-      // Create product
       await ProductModel.create({
         name: product.name,
         description: product.description,
         price: product.price,
         categories: categoryIds,
+      
       });
 
       console.log(`Created product: ${product.name}`);

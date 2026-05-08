@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 export const runtime = "nodejs";
 
 import { connectDb } from "@/lib/db";
-import {
-  ProductModel,
-} from "@/models/ProductModel";
+import { ProductModel } from "@/models/ProductModel";
 
 import { NextRequest, NextResponse } from "next/server";
+
 import OpenAI from "openai";
 
 type ChatBody = {
@@ -20,7 +20,9 @@ function getOpenAIClient() {
     throw new Error("Missing OPENAI_API_KEY");
   }
 
-  return new OpenAI({ apiKey });
+  return new OpenAI({
+    apiKey,
+  });
 }
 
 async function getCatalogContextForAI() {
@@ -29,6 +31,7 @@ async function getCatalogContextForAI() {
   const products = await ProductModel.find()
     .populate({
       path: "categories",
+
       populate: {
         path: "type",
         model: "CategoryType",
@@ -62,16 +65,16 @@ async function getCatalogContextForAI() {
       name: p.name,
       description: p.description,
       price: p.price,
-
+      image: p.image,
       categories,
-
       links: primaryCategory
         ? {
-          categoryType: `/products/${primaryCategory.type?.slug}`,
-
-          category: `/products/${primaryCategory.type?.slug}/${primaryCategory.slug}`,
-
-          product: `/products/${primaryCategory.type?.slug}/${primaryCategory.slug}/${productSlug}`,
+          categoryType:
+            `/products/${primaryCategory.type?.slug}`,
+          category:
+            `/products/${primaryCategory.type?.slug}/${primaryCategory.slug}`,
+          product:
+            `/products/${primaryCategory.type?.slug}/${primaryCategory.slug}/${productSlug}`,
         }
         : null,
     };
@@ -79,10 +82,10 @@ async function getCatalogContextForAI() {
 
   return {
     totalProducts: formattedProducts.length,
+
     products: formattedProducts || [],
   };
 }
-
 
 export async function POST(req: NextRequest) {
   try {
@@ -96,7 +99,9 @@ export async function POST(req: NextRequest) {
           success: false,
           error: "Message is required",
         },
-        { status: 400 }
+        {
+          status: 400,
+        }
       );
     }
 
@@ -104,109 +109,171 @@ export async function POST(req: NextRequest) {
 
     const client = getOpenAIClient();
 
-    const completion = await client.chat.completions.create({
-      model: process.env.OPENAI_MODEL || "gpt-4.1-mini",
+    const completion =
+      await client.chat.completions.create({
+        model:
+          process.env.OPENAI_MODEL ||
+          "gpt-4.1-mini",
 
-      temperature: 0.3,
+        temperature: 0.3,
 
-      messages: [
-        {
-          role: "system",
-          content: `
-                    You are Movato's AI shopping assistant.
+        messages: [
+          {
+            role: "system",
 
-                    Rules:
-                    - Only use the provided catalog data
-                    - Never invent products or prices
-                    - Recommend products based on categories and descriptions
-                    - Keep responses concise and helpful
-                    - If no matching product exists, say so clearly
-                    - Mention prices when relevant
+            content: `
+                You are Movato's AI shopping assistant.
 
-                    IMPORTANT FORMAT RULES:
-                    - Return valid HTML only
-                    - Do NOT return markdown
-                    - Do NOT use backticks
-                    - Use semantic HTML tags only
+            Rules:
+                - Only use the provided catalog data
+                - Never invent products or prices
+                - Recommend products based on categories and descriptions
+                - Keep responses concise and helpful
+                - If no matching product exists, say so clearly
+                - Mention prices when relevant
 
-                    Allowed tags:
-                    <div>
-                    <p>
+            IMPORTANT FORMAT RULES:
+              - Return valid HTML only
+              - Do NOT return markdown
+              - Do NOT use backticks
+              - Use semantic HTML tags only
+
+            Allowed tags:
+                <div>
+                  <p>
                     <ul>
-                    <li>
-                    <strong>
-                    <a>
-                    <br>
+                      <li>
+                        <strong>
+                          <a>
+                            <img>
+                              <button>
+                                <br>
 
-                    For links:
-                    - Use relative URLs exactly as provided
-                    - Example:
-                    <a href="/products/size/large">Large Bags</a>
+            STYLE RULES:
+                - Use inline styles only
+                - Make product cards modern and clean
+                - Add rounded corners
+                - Add spacing and borders
+                - Product image should look like ecommerce product card
+                - View Product should look like a button
 
-                    Example response:
-                    <div>
-                      <p>I found two large bags for you:</p>
+            For product cards use this exact structure:
 
-                      <ul>
-                        <li>
-                          <strong>Phoenix Travel Bag</strong><br>
-                          Large travel bag for mountain and weekend trips.<br>
-                          Price: $49.99<br>
-                          <a href="/products/size/large/phoenix-travel-bag">
-                            View product
-                          </a>
-                        </li>
+      <div style="border:1px solid #e5e5e5;border-radius:16px;padding:16px;margin-top:16px;background:#ffffff;">
 
-                        <li>
-                          <strong>Madison Long Trip Bag</strong><br>
-                          Large luggage for long trips.<br>
-                          Price: $69.99<br>
-                          <a href="/products/size/large/madison-long-trip-bag">
-                            View product
-                          </a>
-                        </li>
-                      </ul>
+        <img
+           src="IMAGE_URL"
+          alt="PRODUCT_NAME"
+          style="
+          width:100%;
+          height:220px;
+          object-fit:cover;
+          border-radius:12px;
+        "
+        />
 
-                      <p>
-                        <a href="/products/size/large">
-                          Browse all large bags
-                        </a>
-                      </p>
-                    </div>
-                    `,
-        },
-        {
-          role: "system",
-          content: `CATALOG:\n${JSON.stringify(catalog)}`,
-        },
+      <div style="margin-top:12px;">
 
-        {
-          role: "user",
-          content: message,
-        },
-      ],
-    });
+          <strong style="font-size:18px;">
+            PRODUCT_NAME
+          </strong>
 
-    const reply =
-      completion.choices?.[0]?.message?.content?.trim() ||
-      "Sorry, I couldn't generate a response.";
+          <p style="margin-top:8px;color:#666;">
+             PRODUCT_DESCRIPTION
+          </p>
+
+            <p style="
+               margin-top:8px;
+              font-weight:bold;
+              font-size:18px;
+            ">
+              ₹PRICE
+            </p>
+
+           <a
+            href="PRODUCT_LINK"
+            style="text-decoration:none;"
+          >
+          <button
+            style="
+            margin-top:12px;
+            background:black;
+            color:white;
+            border:none;
+            padding:12px 18px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:600;
+            "
+          >
+            View Product
+          </button>
+          </a>
+
+        </div>
+
+       </div>
+
+            Example response:
+
+          <div>
+            <p>
+              I found some great large travel bags for you.
+            </p>
+
+              PRODUCT_CARDS_HERE
+          </div>
+            `,
+          },
+
+          {
+            role: "system",
+
+            content: `
+          CATALOG:
+              ${JSON.stringify(catalog)}
+            `,
+          },
+
+          {
+            role: "user",
+
+            content: message,
+          },
+        ],
+      });
+
+           const reply =
+              completion.choices?.[0]?.message?.content?.trim() ||
+            `
+        <div>
+          <p>
+            Sorry, I couldn't generate a response.
+          </p>
+        </div>
+      `;
 
     return NextResponse.json({
       success: true,
+
       reply,
     });
+
   } catch (err: any) {
     console.error(err);
 
     return NextResponse.json(
       {
         success: false,
+
         error:
           typeof err?.message === "string"
             ? err.message
             : "Unexpected error",
       },
-      { status: 500 }
+      {
+        status: 500,
+      }
     );
   }
 }
