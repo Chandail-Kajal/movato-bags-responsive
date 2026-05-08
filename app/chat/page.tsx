@@ -32,7 +32,6 @@ export default function ChatPage() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        
         body: JSON.stringify({ message }),
       });
 
@@ -85,14 +84,18 @@ export default function ChatPage() {
                     : "mr-auto bg-gray-100 text-gray-900",
                 ].join(" ")}
               >
-                {m.content}
+                {m.role === "assistant" ? (
+                  <div
+                    className="chat-html"
+                    dangerouslySetInnerHTML={{
+                      __html: m.content,
+                    }}
+                  />
+                ) : (
+                  m.content
+                )}
               </div>
             ))}
-            {isSending && (
-              <div className="mr-auto max-w-[90%] rounded-2xl bg-gray-100 px-4 py-3 text-sm text-gray-700">
-                Thinking…
-              </div>
-            )}
           </div>
 
           <div className="border-t border-black/10 p-3">
