@@ -243,9 +243,9 @@ export async function POST(req: NextRequest) {
         ],
       });
 
-           const reply =
-              completion.choices?.[0]?.message?.content?.trim() ||
-            `
+    const reply =
+      completion.choices?.[0]?.message?.content?.trim() ||
+      `
         <div>
           <p>
             Sorry, I couldn't generate a response.
