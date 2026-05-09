@@ -2,8 +2,9 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "/api",
+  baseURL: "http://localhost:3000/api",
 });
+
 const buildQueryString = (params: Record<string, any>) => {
   const searchParams = new URLSearchParams();
 
