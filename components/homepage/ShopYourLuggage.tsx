@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import { fetchPublicData } from "@/lib/api";
+import { buildQueryString } from "@/lib/api";
+import axios from "axios";
 import Image from "next/image";
 import { PropsWithChildren, useEffect, useState } from "react";
 
@@ -22,7 +23,24 @@ ${isActive && "font-medium border-3"}`}>
     </button>
   );
 };
+const fetchPublicData = async (
+  section: "shop" | "hero" | "featured" | "category-types",
+  queryParams: Record<string, any> = {}
+) => {
+  try {
+    const queryString = buildQueryString(queryParams);
 
+    const url =`/api/public/sections/${section}${queryString ? `?${queryString}` : ""
+      }`;
+        console.log({url})
+    const { data } = await axios.get(url);
+
+    return data?.data || [];
+  } catch (error) {
+    console.error("fetchPublicData error:", error);
+    return [];
+  }
+};
 export function ShopYourLuggage() {
   const [images, setImages] = useState([])
   const [types, setTypes] = useState<any[]>([])

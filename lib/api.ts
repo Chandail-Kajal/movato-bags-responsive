@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
+const BASE_API=process.env.BASE_API_URL;
+console.log({BASE_API})
+// export const api = axios.create({
+  // baseURL:BASE_API+"/api",
+// });
 
-export const api = axios.create({
-  baseURL: "http://localhost:3000/api",
-});
-
-const buildQueryString = (params: Record<string, any>) => {
+export const buildQueryString = (params: Record<string, any>) => {
   const searchParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
@@ -28,10 +29,10 @@ export const fetchPublicData = async (
   try {
     const queryString = buildQueryString(queryParams);
 
-    const url = `/public/sections/${section}${queryString ? `?${queryString}` : ""
+    const url =BASE_API+`/api/public/sections/${section}${queryString ? `?${queryString}` : ""
       }`;
-
-    const { data } = await api.get(url);
+        console.log({url})
+    const { data } = await axios.get(url);
 
     return data?.data || [];
   } catch (error) {
