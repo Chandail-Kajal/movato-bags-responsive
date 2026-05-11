@@ -35,7 +35,7 @@ export function HeroAdmin() {
 
   const fetchItems = async () => {
     try {
-      const { data } = await api.get("/admin/sections/hero");
+      const { data } = await api.get("/api/admin/sections/hero");
       setItems(data.data || []);
       setOriginal(data.data || []);
     } catch (error) {
@@ -66,7 +66,7 @@ export function HeroAdmin() {
   };
 
   const saveOrder = async () => {
-    await api.put("/admin/sections/hero/reorder", {
+    await api.put("/api/admin/sections/hero/reorder", {
       items: items.map((item, index) => ({
         id: item._id,
         order: index,
@@ -77,7 +77,7 @@ export function HeroAdmin() {
   };
 
   const toggleActive = async (item: HeroType) => {
-    await api.patch("/admin/sections/hero", {
+    await api.patch("/api/admin/sections/hero", {
       id: item._id,
       isActive: !item.isActive,
     });
@@ -88,7 +88,7 @@ export function HeroAdmin() {
   const handleDelete = async (id: string) => {
     if (!confirm("Delete item?")) return;
 
-    await api.delete(`/admin/sections/hero?id=${id}`);
+    await api.delete(`/api/admin/sections/hero?id=${id}`);
     fetchItems();
   };
 

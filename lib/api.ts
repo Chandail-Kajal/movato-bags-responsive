@@ -2,9 +2,7 @@
 import axios from "axios";
 const BASE_API=process.env.BASE_API_URL;
 console.log({BASE_API})
-export const api = axios.create({
-  baseURL:BASE_API+"/api",
-});
+export const api = axios.create();
 
 export const buildQueryString = (params: Record<string, any>) => {
   const searchParams = new URLSearchParams();
@@ -29,7 +27,7 @@ export const fetchPublicData = async (
   try {
     const queryString = buildQueryString(queryParams);
 
-    const url = `/public/sections/${section}${queryString ? `?${queryString}` : ""
+    const url = BASE_API+`/api/public/sections/${section}${queryString ? `?${queryString}` : ""
       }`;
 
     const { data } = await api.get(url);

@@ -47,7 +47,7 @@ export function ShopSectionAdmin() {
   const [editItem, setEditItem] = useState<ItemType | null>(null);
 
   const fetchItems = async () => {
-    const { data } = await api.get("/admin/sections/shop");
+    const { data } = await api.get("/api/admin/sections/shop");
     setItems(data.data || []);
     setOriginal(data.data || []);
   };
@@ -71,7 +71,7 @@ export function ShopSectionAdmin() {
   };
 
   const saveOrder = async () => {
-    await api.put("/admin/sections/shop/reorder", {
+    await api.put("/api/admin/sections/shop/reorder", {
       items: items.map((item, index) => ({
         id: item._id,
         order: index,
@@ -88,7 +88,7 @@ export function ShopSectionAdmin() {
       )
     );
 
-    await api.patch("/admin/sections/shop", {
+    await api.patch("/api/admin/sections/shop", {
       id: item._id,
       isActive: !item.isActive,
     });
@@ -97,7 +97,7 @@ export function ShopSectionAdmin() {
   const handleDelete = async (id: string) => {
     if (!confirm("Delete item?")) return;
 
-    await api.delete(`/admin/sections/shop?id=${id}`);
+    await api.delete(`/api/admin/sections/shop?id=${id}`);
 
     setItems((prev) => prev.filter((i) => i._id !== id));
   };
