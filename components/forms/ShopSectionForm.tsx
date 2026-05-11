@@ -35,12 +35,12 @@ export const ShopSecitonForm = ({
   const [categories, setCategories] = useState<any[]>([]);
 
   const fetchTypes = async () => {
-    const res = await api.get("/admin/category-types");
+    const res = await api.get("/api/admin/category-types");
     setTypes(res.data.data || []);
   };
 
   const fetchCategories = async (typeId: string) => {
-    const res = await api.get(`/admin/categories?type=${typeId}`);
+    const res = await api.get(`/api/admin/categories?type=${typeId}`);
     setCategories(res.data.data || []);
   };
 
@@ -77,10 +77,10 @@ export const ShopSecitonForm = ({
       try {
         if (editItem) {
           formData.append("id", editItem._id);
-          await api.put("/admin/sections/shop", formData);
+          await api.put("/api/admin/sections/shop", formData);
         } else {
           formData.append("order", String(items.length));
-          await api.post("/admin/sections/shop", formData);
+          await api.post("/api/admin/sections/shop", formData);
         }
 
         refresh();

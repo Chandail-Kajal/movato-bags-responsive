@@ -42,10 +42,10 @@ export const HeroForm = ({ editItem, onClose, refresh, items }: any) => {
             try {
                 if (editItem) {
                     formData.append("id", editItem._id);
-                    await api.put("/admin/sections/hero", formData);
+                    await api.put("/api/admin/sections/hero", formData);
                 } else {
                     formData.append("order", String(items.length));
-                    await api.post("/admin/sections/hero", formData);
+                    await api.post("/api/admin/sections/hero", formData);
                 }
 
                 refresh();
